@@ -4,4 +4,5 @@ export interface user{
     ultimoNombre: string;
     gmail: string;
     createdAt: Date;
+    curso: string;
 }

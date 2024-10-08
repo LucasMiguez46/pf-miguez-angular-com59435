@@ -3,20 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { user } from './models';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
 const ELEMENT_DATA: user[] = [
   {
     id: "h1j2",
     primerNombre: "lucas",
     ultimoNombre: "miguez",
     gmail: "lucasmiguez46@gmail.com",
-    createdAt: new Date()
+    createdAt: new Date(),
+    curso: "curso 1",
   },
 ];
 
@@ -29,7 +23,7 @@ const ELEMENT_DATA: user[] = [
 })
 export class UsersComponent {
 [x: string]: any;
-  displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','actions'];
+  displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','curso','actions'];
   dataSource = ELEMENT_DATA;
 
   constructor(private matDialog:MatDialog) {}
