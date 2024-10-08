@@ -1,0 +1,23 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <p>Menu de herramientas</p>
+      @if (showFiller) {
+        <p>que onda perri aca van las herramientas</p>
+      }
+      <button (click)="showFiller = !showFiller" mat-raised-button>
+        <mat-icon>add-outline</mat-icon> Herramientas
+      </button>
+    </mat-drawer>
+  
+    <div class="example-sidenav-content" role="heading">
+        <mat-toolbar>
+            <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span> <mat-icon>home</mat-icon> My App</span>
+        </mat-toolbar>
+
+        <app-users></app-users>
+    </div>
+  
+  </mat-drawer-container>
