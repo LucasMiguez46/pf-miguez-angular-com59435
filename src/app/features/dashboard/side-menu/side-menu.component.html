@@ -6,13 +6,14 @@
 </button>
 
 @if (showFiller) {
-    <div>
-      <ul>
-          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Home</a></button>
-          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Cursos</a></button>
-          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Usuarios</a></button>
-      </ul>
-    </div>
-  }
+  <div>
+    <ul>
+      <a routerLink="home" mat-list-item mat-button>Inicio</a>
+      <a routerLink="/dashboard/courses" mat-list-item mat-button>Cursos</a>
+      <a routerLink="/dashboard/users" mat-list-item mat-button>Usuarios</a>
+    </ul>
+  </div>
 
-<button mat-button tamaño='15px'appFontPlusTwenty class="p-1">Cerrar secion</button>
+}
+
+<a routerLink="/auth" mat-list-item mat-button>Cerrar sesion</a>

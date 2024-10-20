@@ -10,7 +10,7 @@ import { SharedModule } from '../../../shared/shared.module';
   imports: [
     CommonModule,
     SideMenuRoutingModule,
-    SharedModule
+    SharedModule,
   ]
 })
 export class SideMenuModule { }

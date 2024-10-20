@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { user } from './models';
 import { generateRandomString } from '../../../shared/utils';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const ELEMENT_DATA: user[] = [
   {
@@ -27,7 +28,17 @@ export class UsersComponent {
   displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','curso','actions'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private matDialog:MatDialog) {}
+  constructor(
+    private matDialog:MatDialog,     
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+  }
+
+  goToDetail(id: string): void {
+    this.router.navigate([id, 'detail'], {
+      relativeTo: this.activatedRoute,
+    });
+  }
 
   onDelete(id:string){
     if(confirm('Estas seguro de eliminarlo?')){
