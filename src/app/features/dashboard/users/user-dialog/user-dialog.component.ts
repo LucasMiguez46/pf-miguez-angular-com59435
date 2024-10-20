@@ -2,10 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
-import { user } from '../models';
+import { User } from '../models';
 
 interface userDialogData{
-  editingUser?: user;
+  editingUser?: User;
 }
 
 @Component({

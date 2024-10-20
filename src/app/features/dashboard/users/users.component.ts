@@ -1,20 +1,21 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
-import { user } from './models';
+import { User } from './models';
 import { generateRandomString } from '../../../shared/utils';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from '../../../core/services/users.service';
 
-const ELEMENT_DATA: user[] = [
-  {
-    id: "h1j2",
-    primerNombre: "lucas",
-    ultimoNombre: "miguez",
-    gmail: "lucasmiguez46@gmail.com",
-    createdAt: new Date(),
-    curso: "curso 1",
-  },
-];
+// const ELEMENT_DATA: user[] = [
+//   {
+//     id: "h1j2",
+//     primerNombre: "lucas",
+//     ultimoNombre: "miguez",
+//     gmail: "lucasmiguez46@gmail.com",
+//     createdAt: new Date(),
+//     curso: "curso 1",
+//   },
+// ];
 
 
 @Component({
@@ -23,15 +24,38 @@ const ELEMENT_DATA: user[] = [
   styleUrl: './users.component.scss',
   encapsulation: ViewEncapsulation.None // Deshabilitar encapsulación
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit {
 [x: string]: any;
   displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','curso','actions'];
-  dataSource = ELEMENT_DATA;
+  dataSource: User[] = [];
+
+  isLoading = false;
 
   constructor(
-    private matDialog:MatDialog,     
+    private matDialog:MatDialog, 
+    private usersService: UsersService,    
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    // this.dataSource = this.usersService.getUsers();
+    this.loadUsers();
+  }
+  
+  loadUsers(): void {
+    this.isLoading = true;
+    this.usersService.getUsers().subscribe({
+      next: (users) => {
+        this.dataSource = users;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
   }
 
   goToDetail(id: string): void {
@@ -46,7 +70,7 @@ export class UsersComponent {
     }
   }
 
-  openModal(editingUser?: user): void{
+  openModal(editingUser?: User): void{
     this.matDialog.open(UserDialogComponent, {
       data:{
         editingUser,
