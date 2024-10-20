@@ -1,14 +1,6 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer #drawer class="example-sidenav" mode="side">
-      <p>Menu de herramientas</p>
-      @if (showFiller) {
-        <div>
-          <p>en esta seccion deberian ir herramientas</p>
-        </div>
-      }
-      <button (click)="showFiller = !showFiller" mat-raised-button>
-        <mat-icon>add-outline</mat-icon> Herramientas
-      </button>
+      <app-side-menu></app-side-menu>
     </mat-drawer>
   
     <div class="example-sidenav-content" role="heading">

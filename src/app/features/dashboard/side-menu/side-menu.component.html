@@ -1,0 +1,18 @@
+<p>Menu de herramientas</p>
+
+<button (click)="showFiller = !showFiller" mat-raised-button class="p-1">
+  <mat-icon>{{ showFiller ? 'remove' : 'add' }}</mat-icon> 
+  Herramientas
+</button>
+
+@if (showFiller) {
+    <div>
+      <ul>
+          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Home</a></button>
+          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Cursos</a></button>
+          <button mat-button tamaño='20px'appFontPlusTwenty class="p-1"><a>Usuarios</a></button>
+      </ul>
+    </div>
+  }
+
+<button mat-button tamaño='15px'appFontPlusTwenty class="p-1">Cerrar secion</button>
