@@ -1,4 +1,6 @@
 export interface User{
+    password: string;
+    token: string;
     id: string;
     primerNombre: string;
     ultimoNombre: string;

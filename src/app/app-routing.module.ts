@@ -2,14 +2,15 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuthComponent } from './features/auth/auth.component';
-import { HomeComponent } from './features/dashboard/home/home.component';
-import { CoursesComponent } from './features/dashboard/courses/courses.component';
-import { UsersComponent } from './features/dashboard/users/users.component';
 
 const routes: Routes = [
   {
     path: 'auth',
-    component: AuthComponent
+    component: AuthComponent,
+    loadChildren: () =>
+      import('./features/auth/auth.module').then(
+        (m) => m.AuthModule
+      ),
   },
   {
     path: 'dashboard',

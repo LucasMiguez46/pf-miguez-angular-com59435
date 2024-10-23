@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../features/dashboard/users/models';
 import { delay, map, Observable, of } from 'rxjs';
+import { generateRandomString } from '../../shared/utils';
 
 let DATABASE: User[] = [
   {
-    id: 'dbv3Da',
-    primerNombre: 'Goku',
-    ultimoNombre: 'Son',
+    id: 'h1z1',
+    primerNombre: 'Lucas',
+    ultimoNombre: 'miguez',
     createdAt: new Date(),
-    gmail: 'gokussj3@gmail.com',
-    curso: "curso-2",
+    password: '123456',
+    gmail: 'lukmi@gmail.com',
+    token: generateRandomString(20),
+    curso: "curso-1",
   },
 ];
 
@@ -26,9 +29,7 @@ export class UsersService {
   
   getUsers(): Observable<User[]> {
     return new Observable((observer) => {
-      // ACA HAY UN CAMBIO 1
       setInterval(() => {
-        // observer.error('Error al cargar los datos');
         observer.next(DATABASE);
         observer.complete();
       }, 3000);

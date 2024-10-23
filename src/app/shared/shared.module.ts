@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { FontPlusTwentyDirective } from './directives/font-plus-twenty.directive';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { FontPlusTwentyDirective } from './directives/font-plus-twenty.directive
     MatDialogModule,
     FullNamePipe,
     FontPlusTwentyDirective,
+    MatCardModule,
   ],
 })
 export class SharedModule { }
