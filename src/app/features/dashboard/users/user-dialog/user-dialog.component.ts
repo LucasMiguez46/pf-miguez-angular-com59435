@@ -24,7 +24,7 @@ export class UserDialogComponent {
     this.userForm = this.formBuilder.group({
       primerNombre: [null,[Validators.required]],
       ultimoNombre: [null,[Validators.required]],
-      gmail: [null,[Validators.required]],
+      gmail: [null,[Validators.required, Validators.email]],
       curso: [null,[Validators.required]],
     })
     this.editFormValue();

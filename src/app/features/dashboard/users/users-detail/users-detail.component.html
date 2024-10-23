@@ -1,1 +1,15 @@
-<p>users-detail works!</p>
+
+<div *ngIf="isLoading">
+    <p>Cargando, por favor espere...</p>
+  </div>
+  
+  <div *ngIf="!isLoading && user">
+    <a mat-fab routerLink="/dashboard/users" mat-list-item class="p-2, m-3"><mat-icon>undo</mat-icon></a>
+
+    <h2>Detalle del usuario: {{ user | fullName }}</h2>
+    
+    <ul>
+      <li>Mail: {{ user.gmail }}</li>
+      <li>Curso: {{ user.curso }}</li>
+    </ul>
+  </div>

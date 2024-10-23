@@ -6,17 +6,6 @@ import { generateRandomString } from '../../../shared/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 
-// const ELEMENT_DATA: user[] = [
-//   {
-//     id: "h1j2",
-//     primerNombre: "lucas",
-//     ultimoNombre: "miguez",
-//     gmail: "lucasmiguez46@gmail.com",
-//     createdAt: new Date(),
-//     curso: "curso 1",
-//   },
-// ];
-
 
 @Component({
   selector: 'app-users',
@@ -39,7 +28,6 @@ export class UsersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.dataSource = this.usersService.getUsers();
     this.loadUsers();
   }
   
@@ -93,7 +81,7 @@ export class UsersComponent implements OnInit {
               ...this.dataSource,{
                 ...result,
                 id: generateRandomString(8), // Genera un nuevo ID si es un nuevo usuario
-                fecha: new Date(), // Agrega la fecha actual
+                fecha: new Date(), // Agrega la fecha actual 
               },
             ]
           }

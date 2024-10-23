@@ -14,6 +14,16 @@ let DATABASE: User[] = [
     token: generateRandomString(20),
     curso: "curso-1",
   },
+  {
+    id: 'djapq',
+    primerNombre: 'jose',
+    ultimoNombre: 'hernandez',
+    createdAt: new Date(),
+    password: '123456',
+    gmail: 'joher@gmail.com',
+    token: generateRandomString(20),
+    curso: "curso-3",
+  },
 ];
 
 @Injectable({

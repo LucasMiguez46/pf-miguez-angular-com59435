@@ -13,7 +13,6 @@ import { UsersDetailComponent } from './users-detail/users-detail.component';
     UsersComponent,
     UserDialogComponent,
     UsersDetailComponent,
-
   ],
   imports: [
     CommonModule,

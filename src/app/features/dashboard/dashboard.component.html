@@ -8,7 +8,9 @@
             <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
                 <mat-icon>menu</mat-icon>
             </button>
-            <span> <mat-icon>home</mat-icon>student registration application</span>
+            <span>
+                <a mat-fab routerLink="/dashboard/home" tamaño='20px'appFontPlusTwenty mat-list-item class="p-2, m-3"><mat-icon>home</mat-icon></a>
+                student registration application</span>
         </mat-toolbar>
 
         <router-outlet></router-outlet>
