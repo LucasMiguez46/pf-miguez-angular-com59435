@@ -35,7 +35,7 @@
 
   <ng-container matColumnDef="curso">
     <th tamaño='20px'appFontPlusTwenty mat-header-cell *matHeaderCellDef> Curso </th>
-    <td mat-cell *matCellDef="let element"> {{element.curso}} </td>
+    <td mat-cell *matCellDef="let element">{{ getCourseName(element.curso) }}</td>
   </ng-container>
 
   <!-- actions Column -->

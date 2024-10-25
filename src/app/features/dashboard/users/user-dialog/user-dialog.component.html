@@ -1,6 +1,6 @@
 <h1 mat-dialog-tittle>{{data?.editingUser ? 'Editar' : 'Crear'}} usuario</h1>
 <div mat-dialog-content>
-    <form [formGroup]="userForm">
+    <form [formGroup]="userForm" >
         <div class="row">
             <div class="col-6">
               <mat-form-field class="example-form-field ">
@@ -39,10 +39,9 @@
               <mat-form-field class="w-100">
                 <mat-label>Seleccionar curso</mat-label>
                 <mat-select formControlName="curso" required>
-                  <mat-option value="curso-1">Curso 1</mat-option>
-                  <mat-option value="curso-2">Curso 2</mat-option>
-                  <mat-option value="curso-3">Curso 3</mat-option>
-                  <mat-option value="curso-4">Curso 4</mat-option>
+                  <mat-option *ngFor="let element of dataSource" [value]="element.id">
+                    {{ element.name }}
+                  </mat-option>
                 </mat-select>
               </mat-form-field>
             </div>

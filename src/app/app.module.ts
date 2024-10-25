@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { UsersService } from './core/services/users.service';
+import { CoursesService } from './core/services/courses.service';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { UsersService } from './core/services/users.service';
   ],
   providers: [
     provideAnimationsAsync(),
-    UsersService
+    UsersService,
+    CoursesService
   ],
   bootstrap: [AppComponent]
 })

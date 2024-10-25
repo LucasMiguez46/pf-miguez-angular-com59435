@@ -1,8 +1,10 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
 import { User } from '../models';
+import { CoursesService } from '../../../../core/services/courses.service';
+import { Courses } from '../../courses/models';
 
 interface userDialogData{
   editingUser?: User;
@@ -13,12 +15,14 @@ interface userDialogData{
   templateUrl: './user-dialog.component.html',
   styles: ``
 })
-export class UserDialogComponent {
+export class UserDialogComponent implements OnInit {
   userForm: FormGroup;
+  dataSource: Courses[] = [];
 
   constructor(
     private matDialogRef: MatDialogRef<UserDialogComponent>, 
     private formBuilder: FormBuilder,
+    private coursesService: CoursesService,
     @Inject(MAT_DIALOG_DATA) public data?:userDialogData
   ) {
     this.userForm = this.formBuilder.group({
@@ -29,6 +33,13 @@ export class UserDialogComponent {
     })
     this.editFormValue();
   }
+  ngOnInit(): void {
+    this.coursesService.getCourses().subscribe(cursos => {
+      this.dataSource = cursos;
+    });
+  }
+
+
 
   editFormValue(){
     if (this.data?.editingUser) {

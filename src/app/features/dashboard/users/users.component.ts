@@ -5,6 +5,8 @@ import { User } from './models';
 import { generateRandomString } from '../../../shared/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
+import { CoursesService } from '../../../core/services/courses.service';
+import { Courses } from '../courses/models';
 
 
 @Component({
@@ -18,21 +20,27 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','curso','actions'];
   dataSource: User[] = [];
 
+  dataSourceCourses: Courses[] = [];
+
   isLoading = false;
 
   constructor(
     private matDialog:MatDialog, 
-    private usersService: UsersService,    
+    private usersService: UsersService,  
+    private coursesService: CoursesService,  
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.loadUsers();
+    
   }
   
   loadUsers(): void {
     this.isLoading = true;
+  
+    // Cargar los usuarios
     this.usersService.getUsers().subscribe({
       next: (users) => {
         this.dataSource = users;
@@ -44,6 +52,22 @@ export class UsersComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  
+    // Cargar los cursos
+    this.coursesService.getCourses().subscribe({
+      next: (courses) => {
+        this.dataSourceCourses = courses;
+        console.log('Cursos cargados:', this.dataSourceCourses);
+      },
+      error: () => {
+        console.error('Error al cargar los cursos');
+      },
+    });
+  }
+
+  getCourseName(courseId: string): string {
+    const course = this.dataSourceCourses.find(c => c.id === courseId);
+    return course ? course.name : 'Curso no encontrado';
   }
 
   goToDetail(id: string): void {
@@ -74,7 +98,7 @@ export class UsersComponent implements OnInit {
               ...user,
               ...result,
               id: user.id, // Mantén el ID original
-              createdAt: user.createdAt, // Mantén la fecha original
+              //createdAt: user.createdAt, // Mantén la fecha original
             } : user);
           }else{
             this.dataSource=[
