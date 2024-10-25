@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: ':id/detail',
     component: UsersDetailComponent
-  }
+  },
+  {
+    path:'**',
+    redirectTo: 'UsersComponent',
+  },
 ];
 
 @NgModule({
