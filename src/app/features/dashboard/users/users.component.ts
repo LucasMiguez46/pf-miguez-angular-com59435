@@ -97,15 +97,15 @@ export class UsersComponent implements OnInit {
             this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {
               ...user,
               ...result,
-              id: user.id, // Mantén el ID original
-              //createdAt: user.createdAt, // Mantén la fecha original
+              id: user.id,
+              createdAt: user.createdAt,
             } : user);
           }else{
             this.dataSource=[
               ...this.dataSource,{
                 ...result,
-                id: generateRandomString(8), // Genera un nuevo ID si es un nuevo usuario
-                fecha: new Date(), // Agrega la fecha actual 
+                id: generateRandomString(8),
+                fecha: new Date(), 
               },
             ]
           }

@@ -37,4 +37,10 @@ export class CoursesComponent implements OnInit{
     });
   }
 
+  onDelete(id:string){
+    if(confirm('Estas seguro de eliminarlo?')){
+      this.dataSource = this.dataSource.filter((cursos) => cursos.id !== id);
+    }
+  }
+
 }

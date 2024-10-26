@@ -26,8 +26,8 @@ export class UserDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data?:userDialogData
   ) {
     this.userForm = this.formBuilder.group({
-      primerNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'), this.soloLetras()]],
-      ultimoNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'), this.soloLetras()]],
+      primerNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), this.soloLetras()]],
+      ultimoNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), this.soloLetras()]],
       gmail: [null,[Validators.required, Validators.email]],
       curso: [null,[Validators.required]],
     })
