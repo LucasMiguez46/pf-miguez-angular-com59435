@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { generateRandomString } from '../../../../shared/utils';
 import { User } from '../models';
@@ -26,13 +26,22 @@ export class UserDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data?:userDialogData
   ) {
     this.userForm = this.formBuilder.group({
-      primerNombre: [null,[Validators.required]],
-      ultimoNombre: [null,[Validators.required]],
+      primerNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'), this.soloLetras()]],
+      ultimoNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$'), this.soloLetras()]],
       gmail: [null,[Validators.required, Validators.email]],
       curso: [null,[Validators.required]],
     })
     this.editFormValue();
   }
+
+  soloLetras(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const value = control.value;
+      const isValid = /^[a-zA-Z]+$/.test(value);
+      return isValid ? null : { onlyLetters: true };
+    };
+  }
+
   ngOnInit(): void {
     this.coursesService.getCourses().subscribe(cursos => {
       this.dataSource = cursos;

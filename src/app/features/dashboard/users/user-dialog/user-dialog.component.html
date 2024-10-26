@@ -12,6 +12,11 @@
                   Campo Obligatorio.
                 }
               </mat-error>
+              <mat-error>
+                @if (userForm.get('primerNombre')?.hasError('onlyLetters')) {
+                  Solo Letras.
+                }
+              </mat-error>
             </div>
             <div class="col-6">
               <mat-form-field class="example-form-field ">
@@ -21,6 +26,11 @@
               <mat-error>
                 @if (userForm.get('ultimoNombre')?.hasError('required')) {
                   Campo Obligatorio.
+                }
+              </mat-error>
+              <mat-error>
+                @if (userForm.get('ultimoNombre')?.hasError('onlyLetters')) {
+                  Solo Letras.
                 }
               </mat-error>
             </div>
