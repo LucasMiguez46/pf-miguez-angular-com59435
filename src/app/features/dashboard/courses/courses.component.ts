@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Courses } from './models';
 import { CoursesService } from '../../../core/services/courses.service';
+import { generateRandomString } from '../../../shared/utils';
+import { MatDialog } from '@angular/material/dialog';
+import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
+
 
 @Component({
   selector: 'app-courses',
@@ -8,23 +12,26 @@ import { CoursesService } from '../../../core/services/courses.service';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent implements OnInit{
+
 [x: string]: any;
+displayedColumns: string[] = ['id', 'name', 'createdAt', 'actions'];
+dataSource: Courses[] = [];
+
+isLoading = false;
+
   constructor(
-    private CoursesService: CoursesService,
+    private matDialog:MatDialog, 
+    private coursesService: CoursesService,
   ){}
 
-  displayedColumns: string[] = ['id', 'name', 'createdAt', 'actions'];
-  dataSource: Courses[] = [];
-
-  isLoading = false;
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadCourses();
   }
   
-  loadUsers(): void {
+  loadCourses(): void {
     this.isLoading = true;
-    this.CoursesService.getCourses().subscribe({
+    this.coursesService.getCourses().subscribe({
       next: (courses: Courses[]) => {
         this.dataSource = courses;
       },
@@ -43,4 +50,35 @@ export class CoursesComponent implements OnInit{
     }
   }
 
+  openModalCourse(editingCourse?: Courses): void{
+    this.matDialog.open(CoursesDialogComponent, {
+      data:{
+        editingCourse,
+      },
+    }).afterClosed().
+    subscribe({
+      next: (result) =>{
+        console.log('Recibimos: ', result);
+
+        if (!!result) {
+          if (editingCourse) {
+            this.dataSource = this.dataSource.map((course) => course.id === editingCourse.id ? {
+              ...course,
+              ...result,
+              id: course.id,
+              createdAt: course.createdAt,
+            } : course);
+          }else{
+            this.dataSource=[
+              ...this.dataSource,{
+                ...result,
+                id: generateRandomString(8),
+                fecha: new Date(), 
+              },
+            ]
+          }
+        }
+      }
+    });
+  }
 }

@@ -1,5 +1,15 @@
+<h2 tamaño='25px'appFontPlusTwenty class="p-3">Cursos actuales:</h2>
+
+<button mat-button (click)="openModalCourse()">
+  <mat-icon>
+    add
+  </mat-icon>
+  Crear curso
+</button>
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
+
     <!-- Id Column -->
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef>No.</th>

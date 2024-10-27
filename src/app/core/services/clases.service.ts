@@ -1,0 +1,60 @@
+import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { generateRandomString } from '../../shared/utils';
+import { Clases } from '../../features/dashboard/clases/models';
+
+let CLASES_DB: Clases[] = [
+  {
+    id: generateRandomString(4),
+    name: 'clase 1',
+    createdAt: new Date(),
+  },
+  {
+    id: generateRandomString(4),
+    name: 'clase 2',
+    createdAt: new Date(),
+  },
+  {
+    id: generateRandomString(4),
+    name: 'clase 3',
+    createdAt: new Date(),
+  },
+];
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ClasesService {
+
+  constructor() { }
+
+    getClases(): Observable<Clases[]> {
+      return of([...CLASES_DB]);
+    }
+  
+    createClases(
+      clase: Omit<Clases, 'id' | 'createdAt'>
+    ): Observable<Clases> {
+      const claseCreada = {
+        ...clase,
+        id: generateRandomString(4),
+        createdAt: new Date(),
+      };
+      CLASES_DB.push(claseCreada);
+      return of(claseCreada);
+    }
+  
+    editClases(id: string, clases: Partial<Clases>): Observable<Clases> {
+      const clasesToEdit = CLASES_DB.find((cat) => cat.id === id);
+  
+      if (!clasesToEdit) {
+        return throwError(() => new Error('No se encontro la clase'));
+      }
+  
+      CLASES_DB = CLASES_DB.map((cat) =>
+        cat.id === id ? { ...clasesToEdit, ...clases } : cat
+      );
+  
+      return of(clasesToEdit);
+    }
+}

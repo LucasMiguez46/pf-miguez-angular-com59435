@@ -18,6 +18,13 @@ let DATABASE: Courses[] = [
     createdAt: new Date(),
     categoryId: 'VCSsd3',
   },
+  {
+    id: generateRandomString(4),
+    name: 'dibujo digital',
+    price: 9999,
+    createdAt: new Date(),
+    categoryId: 'VCSsd4',
+  },
 ];
 
 @Injectable({
@@ -33,8 +40,8 @@ export class CoursesService {
     return this.getCourses();
   }
 
-  createProduct(data: Omit<Courses, 'id'>): Observable<Courses[]> {
-    DATABASE.push({ ...data, id: generateRandomString(4) });
+  createCourses(data: Omit<Courses, 'id'>): Observable<Courses[]> {
+    DATABASE.push({ ...data, id: generateRandomString(4), price: 9999, categoryId: generateRandomString(4), createdAt: new Date()});
     return this.getCourses();
   }
 }
