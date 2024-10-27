@@ -1,13 +1,18 @@
-<form [formGroup]="clasesForm" (ngSubmit)="handleSubmit()" class="p-3">
-    <mat-form-field>
-      <mat-label>Nombre de la clase</mat-label>
-      <input formControlName="name" matInput placeholder="Default" />
-  
-      <button matSuffix mat-icon-button>
-        <mat-icon> {{ isEditing ? "edit" : "add" }}</mat-icon>
-      </button>
-    </mat-form-field>
+<h2 tamaño='25px'appFontPlusTwenty>Clases</h2>
+
+<div class="d-flex align-items-center">
+  <h3 tamaño='16px'appFontPlusTwenty>Cree una clase:</h3>
+  <form [formGroup]="clasesForm" (ngSubmit)="handleSubmit()" class="p-3">
+      <mat-form-field>
+        <mat-label>Nombre de la clase</mat-label>
+        <input formControlName="name" matInput placeholder="Default" />
+    
+        <button matSuffix mat-icon-button>
+          <mat-icon> {{ isEditing ? "edit" : "add" }}</mat-icon>
+        </button>
+      </mat-form-field>
   </form>
+</div>
 
   <table mat-table [dataSource]="clases" class="mat-elevation-z8">
     <!-- Id Column -->

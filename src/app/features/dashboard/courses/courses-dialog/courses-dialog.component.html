@@ -1,16 +1,16 @@
-<h1 mat-dialog-tittle>{{data?.editingCourse ? 'Editar' : 'Crear'}} Curso</h1>
+<h1 mat-dialog-tittle class="text-center text-info-emphasis">{{data?.editingCourse ? 'Editar' : 'Crear'}} Curso</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="coursesForm">
         <div class="row">
-            <div class="col-12">
-                <mat-form-field class="example-form-field">
+            <div class="col-12 w-100">
+                <mat-form-field class="example-form-field" class="w-100">
                     <mat-label>Nombre del curso: </mat-label>
                     <input formControlName="name" matInput type="text">
                 </mat-form-field>
             </div>
             <div class="col-12">
-                <mat-form-field class="example-form-field">
+                <mat-form-field class="example-form-field" class="w-100">
                     <mat-label>Precio del curso: </mat-label>
                     <input formControlName="price" matInput type="number">
                 </mat-form-field>
