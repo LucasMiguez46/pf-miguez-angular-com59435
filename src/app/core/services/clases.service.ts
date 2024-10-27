@@ -57,4 +57,9 @@ export class ClasesService {
   
       return of(clasesToEdit);
     }
+
+    deleteById(id: string): Observable<Clases[]> {
+      CLASES_DB = CLASES_DB.filter((p) => p.id !== id);
+      return this.getClases();
+    }
 }

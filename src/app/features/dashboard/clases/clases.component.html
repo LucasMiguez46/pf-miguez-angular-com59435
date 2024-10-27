@@ -1,1 +1,66 @@
-<p>clases works!</p>
+<form [formGroup]="clasesForm" (ngSubmit)="handleSubmit()">
+    <mat-form-field>
+      <mat-label>Nombre de la clase</mat-label>
+      <input formControlName="name" matInput placeholder="Default" />
+  
+      <button matSuffix mat-icon-button>
+        <mat-icon> {{ isEditing ? "edit" : "add" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
+  <table mat-table [dataSource]="clases" class="mat-elevation-z8">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+  
+    <!-- Name Column (editable) -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- Si estamos en modo edición para esta fila, mostrar input -->
+        <ng-container *ngIf="editingId === element.id; else readMode">
+          <input [formControl]="nameControl" />
+        </ng-container>
+        <!-- Modo lectura, solo muestra el texto -->
+        <ng-template #readMode>{{ element.name }}</ng-template>
+      </td>
+    </ng-container>
+  
+    <!-- CreatedAt Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>Fecha de creación</th>
+      <td mat-cell *matCellDef="let element">{{ element.createdAt | date }}</td>
+    </ng-container>
+  
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- Si estamos editando esta fila, mostrar botones Guardar y Cancelar -->
+        <ng-container *ngIf="editingId === element.id; else defaultActions">
+          <button mat-icon-button (click)="saveEdit(element.id)">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEdit()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </ng-container>
+  
+        <!-- Acciones por defecto: Editar y Eliminar -->
+        <ng-template #defaultActions>
+          <button mat-icon-button (click)="startEdit(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDelete(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>

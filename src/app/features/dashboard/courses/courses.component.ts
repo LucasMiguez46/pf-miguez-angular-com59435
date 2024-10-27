@@ -14,7 +14,7 @@ import { CoursesDialogComponent } from './courses-dialog/courses-dialog.componen
 export class CoursesComponent implements OnInit{
 
 [x: string]: any;
-displayedColumns: string[] = ['id', 'name', 'createdAt', 'actions'];
+displayedColumns: string[] = ['id', 'name','price', 'createdAt', 'actions'];
 dataSource: Courses[] = [];
 
 isLoading = false;
