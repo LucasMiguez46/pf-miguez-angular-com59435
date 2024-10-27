@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CoursesService } from '../../../../core/services/courses.service';
 import { generateRandomString } from '../../../../shared/utils';
-import { UserDialogComponent } from '../../users/user-dialog/user-dialog.component';
 import { Courses } from '../models';
 
 interface CoursesDialogData{
