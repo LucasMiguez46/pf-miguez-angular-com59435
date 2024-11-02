@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": "1fcd",
+      "primerNombre": "Lucas",
+      "ultimoNombre": "Miguez",
+      "gmail": "lumi46@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "token": "hdsoaghf72984hdu38dnh26fo4hnd982",
+      "createdAt": "2024-11-02T19:44:14.046Z"
+    }
+  ],
+  "cursos": [],
+  "clases": []
+}

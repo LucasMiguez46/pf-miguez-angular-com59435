@@ -8,6 +8,8 @@ import { DashboardModule } from './features/dashboard/dashboard.module';
 import { UsersService } from './core/services/users.service';
 import { CoursesService } from './core/services/courses.service';
 
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -16,12 +18,13 @@ import { CoursesService } from './core/services/courses.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
   ],
   providers: [
     provideAnimationsAsync(),
     UsersService,
-    CoursesService
+    CoursesService,
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })
