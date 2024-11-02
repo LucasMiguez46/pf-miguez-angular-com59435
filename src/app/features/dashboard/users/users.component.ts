@@ -13,7 +13,7 @@ import { Courses } from '../courses/models';
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
-  encapsulation: ViewEncapsulation.None // Deshabilitar encapsulación
+  encapsulation: ViewEncapsulation.None
 })
 export class UsersComponent implements OnInit {
 [x: string]: any;

@@ -8,6 +8,6 @@ export class FullNamePipe implements PipeTransform {
   transform(value: any, ...args: any[]): String {
     const nombreCompleto = value.primerNombre + " " + value.ultimoNombre;
 
-    return nombreCompleto; // tamaño por defecto
+    return nombreCompleto; 
   }
 }

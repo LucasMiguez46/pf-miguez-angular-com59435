@@ -1,20 +1,18 @@
 <p>Menu de herramientas</p>
 
-<button (click)="showFiller = !showFiller" mat-raised-button class="p-1">
-  <mat-icon>{{ showFiller ? 'remove' : 'add' }}</mat-icon> 
-  Herramientas
-</button>
+<mat-nav-list>
+  <a >
+    <button tamaño='20px'appFontPlusTwenty routerLink="home" mat-button>Inicio</button>
+  </a>
+  <a>
+    <button tamaño='20px'appFontPlusTwenty routerLink="/dashboard/courses" mat-button>Cursos</button>
+  </a>
+  <a>
+    <button tamaño='20px'appFontPlusTwenty routerLink="/dashboard/clases" mat-button>Clases</button>
+  </a>
+  <a>
+    <button tamaño='20px'appFontPlusTwenty routerLink="/dashboard/users" mat-button>Usuarios</button>
+  </a>
+</mat-nav-list>
 
-@if (showFiller) {
-  <div>
-    <ul>
-      <a routerLink="home" mat-list-item mat-button>Inicio</a>
-      <a routerLink="/dashboard/courses" mat-list-item mat-button>Cursos</a>
-      <a routerLink="/dashboard/clases" mat-list-item mat-button>Clases</a>
-      <a routerLink="/dashboard/users" mat-list-item mat-button>Usuarios</a>
-    </ul>
-  </div>
-
-}
-
-<a routerLink="/auth" mat-list-item mat-button>Cerrar sesion</a>
+<a routerLink="/auth" (click)="logout()" mat-button>Cerrar sesion</a>

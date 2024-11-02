@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FullNamePipe } from './pipes/full-name.pipe';
 import { FontPlusTwentyDirective } from './directives/font-plus-twenty.directive';
 import {MatCardModule} from '@angular/material/card';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {MatCardModule} from '@angular/material/card';
     FullNamePipe,
     FontPlusTwentyDirective,
     MatCardModule,
+    MatListModule,
   ],
 })
 export class SharedModule { }
