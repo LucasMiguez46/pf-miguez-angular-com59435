@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../../../core/services/users.service';
 import { User } from '../models';
 import { Courses } from '../../courses/models';
+import { CoursesService } from '../../../../core/services/courses.service';
 
 @Component({
   selector: 'app-users-detail',
@@ -13,12 +14,15 @@ export class UsersDetailComponent implements OnInit {
   idUsuario?: string;
   user?: User;
   dataSourceCourses: Courses[] = [];
+
+  
   isLoading = false;
   errorMessage: string | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private coursesService: CoursesService
   ){}
 
 
@@ -26,13 +30,36 @@ export class UsersDetailComponent implements OnInit {
     this.isLoading = true;
     this.idUsuario = this.activatedRoute.snapshot.params['id'];
 
+    // if (this.idUsuario) {
+    //   this.getUserDetails(this.idUsuario);
+    // }
     if (this.idUsuario) {
-      this.getUserDetails(this.idUsuario);
+      // Primero cargamos la lista de cursos y luego los detalles del usuario
+      this.loadCourses();
     }
+  }
+
+  private loadCourses(): void {
+    this.coursesService.getCourses().subscribe({
+      next: (cursos) => {
+        this.dataSourceCourses = cursos;
+        // Después de cargar los cursos, cargamos los detalles del usuario
+        if (this.idUsuario) {
+          this.getUserDetails(this.idUsuario);
+        }
+      },
+      error: (err) => {
+        this.errorMessage = 'Error al cargar los cursos: ' + err.message;
+        console.error('Error al cargar los cursos', err);
+        this.isLoading = false;
+      }
+    });
   }
 
   getCourseName(courseId: string): string {
     const course = this.dataSourceCourses.find(c => c.id === courseId);
+    console.log("el curso es: " + course);
+    console.log(this.dataSourceCourses);
     return course ? course.name : 'Curso no encontrado';
   }
 
