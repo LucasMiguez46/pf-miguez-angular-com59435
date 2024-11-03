@@ -1,15 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { generateRandomString } from '../../../../shared/utils';
+import { UsersService } from '../../../../core/services/users.service';
 import { User } from '../models';
 import { CoursesService } from '../../../../core/services/courses.service';
 import { Courses } from '../../courses/models';
+import { generateRandomString } from '../../../../shared/utils';
 
-interface userDialogData{
+interface UserDialogData {
   editingUser?: User;
 }
-
 @Component({
   selector: 'app-user-dialog',
   templateUrl: './user-dialog.component.html',
@@ -18,20 +18,23 @@ interface userDialogData{
 export class UserDialogComponent implements OnInit {
   userForm: FormGroup;
   dataSource: Courses[] = [];
+  isEditMode: boolean = false;
 
   constructor(
     private matDialogRef: MatDialogRef<UserDialogComponent>, 
     private formBuilder: FormBuilder,
+    private usersService: UsersService,
     private coursesService: CoursesService,
-    @Inject(MAT_DIALOG_DATA) public data?:userDialogData
+    @Inject(MAT_DIALOG_DATA) public data:UserDialogData
   ) {
+
     this.userForm = this.formBuilder.group({
       primerNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), this.soloLetras()]],
       ultimoNombre: [null,[Validators.required, Validators.minLength(3), Validators.maxLength(20), this.soloLetras()]],
       gmail: [null,[Validators.required, Validators.email]],
       curso: [null,[Validators.required]],
     })
-    this.editFormValue();
+    this.patchFormValue();
   }
 
   soloLetras(): ValidatorFn {
@@ -45,26 +48,43 @@ export class UserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.coursesService.getCourses().subscribe(cursos => {
       this.dataSource = cursos;
+
+      if (this.isEditing) {
+        this.patchFormValue();
+      }
     });
   }
 
+  private get isEditing() {
+    return !!this.data?.editingUser;
+  }
 
 
-  editFormValue(){
+  patchFormValue() {
     if (this.data?.editingUser) {
-      this.userForm.patchValue(this.data.editingUser);
+      this.userForm.patchValue({
+        primerNombre: this.data.editingUser.primerNombre,
+        ultimoNombre: this.data.editingUser.ultimoNombre,
+        gmail: this.data.editingUser.gmail,
+        curso: this.data.editingUser.curso 
+      });
     }
   }
 
-  onSave():void{
+
+  onSave(): void {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
-    }else{
+    } else {
       this.matDialogRef.close({
         ...this.userForm.value,
-        id: generateRandomString(8),
-        createdAt: new Date()
-      })
-    } 
+        id: this.isEditing
+          ? this.data!.editingUser!.id
+          : generateRandomString(4),
+        createdAt: this.isEditing
+          ? this.data!.editingUser!.createdAt
+          : new Date(),
+      }); 
+    }
   }
 }

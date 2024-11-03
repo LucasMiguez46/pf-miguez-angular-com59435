@@ -104,7 +104,7 @@ export class UsersComponent implements OnInit {
             this.dataSource=[
               ...this.dataSource,{
                 ...result,
-                id: generateRandomString(8),
+                id: generateRandomString(4),
                 fecha: new Date(), 
               },
             ]
