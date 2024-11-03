@@ -77,42 +77,17 @@ export class UsersComponent implements OnInit {
   }
 
   onDelete(id:string){
-    if(confirm('Estas seguro de eliminarlo?')){
-      this.dataSource = this.dataSource.filter((usuarios) => usuarios.id !== id);
+    if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+      this.usersService.removeUserById(id).subscribe({
+        next: (updatedUsers) => {
+          this.dataSource = updatedUsers;
+        },
+        error: (err) => {
+          console.error('Error al eliminar el usuario', err);
+        }
+      });
     }
   }
-
-  // openModal(editingUser?: User): void{
-  //   this.matDialog.open(UserDialogComponent, {
-  //     data:{
-  //       editingUser,
-  //     },
-  //   }).afterClosed().
-  //   subscribe({
-  //     next: (result) =>{
-  //       console.log('Recibimos: ', result);
-
-  //       if (!!result) {
-  //         if (editingUser) {
-  //           this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {
-  //             ...user,
-  //             ...result,
-  //             id: user.id,
-  //             createdAt: user.createdAt,
-  //           } : user);
-  //         }else{
-  //           this.dataSource=[
-  //             ...this.dataSource,{
-  //               ...result,
-  //               id: generateRandomString(4),
-  //               fecha: new Date(), 
-  //             },
-  //           ]
-  //         }
-  //       }
-  //     }
-  //   });
-  // }
 
   openModal(editingUser?: User): void {
     this.matDialog.open(UserDialogComponent, {
