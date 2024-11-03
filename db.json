@@ -20,6 +20,17 @@
       "password": "e8pe7Avo",
       "token": "x6sKj4HCsZ0gGjYK5zWb",
       "createdAt": "2024-11-03T04:22:53.279Z"
+    },
+    {
+      "id": "Fldr",
+      "primerNombre": "probando",
+      "ultimoNombre": "apellido",
+      "gmail": "ap@gmail.com",
+      "curso": "K2Rr",
+      "createdAt": "2024-11-03T21:50:49.313Z",
+      "role": "USER",
+      "password": "QJivOpLl",
+      "token": "Td9ZJ3X5euOH2iLVegTt"
     }
   ],
   "cursos": [],

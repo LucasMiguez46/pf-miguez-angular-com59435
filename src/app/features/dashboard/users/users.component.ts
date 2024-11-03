@@ -82,32 +82,81 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  openModal(editingUser?: User): void{
+  // openModal(editingUser?: User): void{
+  //   this.matDialog.open(UserDialogComponent, {
+  //     data:{
+  //       editingUser,
+  //     },
+  //   }).afterClosed().
+  //   subscribe({
+  //     next: (result) =>{
+  //       console.log('Recibimos: ', result);
+
+  //       if (!!result) {
+  //         if (editingUser) {
+  //           this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {
+  //             ...user,
+  //             ...result,
+  //             id: user.id,
+  //             createdAt: user.createdAt,
+  //           } : user);
+  //         }else{
+  //           this.dataSource=[
+  //             ...this.dataSource,{
+  //               ...result,
+  //               id: generateRandomString(4),
+  //               fecha: new Date(), 
+  //             },
+  //           ]
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
+
+  openModal(editingUser?: User): void {
     this.matDialog.open(UserDialogComponent, {
-      data:{
+      data: {
         editingUser,
       },
-    }).afterClosed().
-    subscribe({
-      next: (result) =>{
+    })
+    .afterClosed()
+    .subscribe({
+      next: (result) => {
         console.log('Recibimos: ', result);
-
+  
         if (!!result) {
           if (editingUser) {
-            this.dataSource = this.dataSource.map((user) => user.id === editingUser.id ? {
-              ...user,
-              ...result,
-              id: user.id,
-              createdAt: user.createdAt,
-            } : user);
-          }else{
-            this.dataSource=[
-              ...this.dataSource,{
-                ...result,
-                id: generateRandomString(4),
-                fecha: new Date(), 
+            // Actualizar un usuario existente
+            this.usersService.updateUserById(editingUser.id, result).subscribe({
+              next: (updatedUser) => {
+                // Aquí mappeamos y reemplazamos el usuario actualizado en la dataSource local
+                this.dataSource = this.dataSource.map((user) =>
+                  user.id === editingUser.id ? {
+                    ...user,
+                    ...result,
+                    id: user.id,
+                    createdAt: user.createdAt,
+                  } : user
+                );
+                console.log('Usuario actualizado:', updatedUser);
               },
-            ]
+              error: (err) => {
+                console.error('Error al actualizar el usuario', err);
+              }
+            });
+          } else {
+            // Crear un nuevo usuario
+            this.usersService.createUser(result).subscribe({
+              next: (newUser) => {
+                // Añadimos el nuevo usuario a la dataSource local
+                this.dataSource = [...this.dataSource, newUser]; // <-- Asegúrate de que es un array plano de User[]
+                console.log('Nuevo usuario creado:', newUser);
+              },
+              error: (err) => {
+                console.error('Error al crear el usuario', err);
+              }
+            });
           }
         }
       }

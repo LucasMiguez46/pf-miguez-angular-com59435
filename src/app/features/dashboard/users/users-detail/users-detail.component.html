@@ -1,15 +1,23 @@
 
 <div *ngIf="isLoading">
-    <p>Cargando, por favor espere...</p>
-  </div>
+  <p>Cargando, por favor espere...</p>
+</div>
   
-  <div *ngIf="!isLoading && user">
-    <a mat-fab routerLink="/dashboard/users" mat-list-item class="p-2, m-3"><mat-icon>undo</mat-icon></a>
+<div *ngIf="!isLoading && user">
+  <button mat-fab (click)="goBack()" class="m-2"><mat-icon>undo</mat-icon></button>
+  <mat-card appearance="outlined">
+    <mat-card-title>
+      <h2>Detalle del usuario: {{ user | fullName }}</h2>
+    </mat-card-title>
+    <mat-card-content>
+      <ul>
+        <li>Mail: {{ user.gmail }}</li>
+        <li>Curso: {{ getCourseName(user.curso)}}</li>
+        <li>contraseña: {{user.password}}</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
 
-    <h2>Detalle del usuario: {{ user | fullName }}</h2>
-    
-    <ul>
-      <li>Mail: {{ user.gmail }}</li>
-      <li>Curso: {{ user.curso }}</li>
-    </ul>
-  </div>
+<div *ngIf="!isLoading && !user" class="error-message">
+  <p>Usuario no encontrado o hubo un error al cargar los detalles.</p>
+</div>
