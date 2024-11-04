@@ -15,7 +15,7 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
@@ -32,22 +32,26 @@ export class LoginComponent {
     }
   }
 
+  ALogin(): void{
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (result) => {
+        this.router.navigate(['dashboard', 'home']);
+      },
+      error: (err) => {
+        console.error(err);
+        if (err instanceof Error) {
+          alert(err.message);
+        }
+      },
+    });
+  }
+
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
       // login
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (result) => {
-          this.router.navigate(['dashboard', 'home']);
-        },
-        error: (err) => {
-          console.error(err);
-          if (err instanceof Error) {
-            alert(err.message);
-          }
-        },
-      });
+      this.ALogin();
     }
   }
 }
