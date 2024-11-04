@@ -80,7 +80,6 @@ fdescribe('AuthService', () => {
       url: `${service['baseURL']}/users?email=${mockAuthData.gmail}&password=${mockAuthData.password}`,
       method: 'GET',
     });
-    // mockReq.flush([], { status: 401, statusText: 'Unauthorized' });
     mockReq.flush([]);
   });
 

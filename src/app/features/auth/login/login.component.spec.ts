@@ -62,8 +62,6 @@ describe('LoginComponent', () => {
       password: '123456',
     });
 
-    // const spyOnLogin = spyOn((component as any).authService, 'login')
-
     const spyOnLogin = spyOn(component, 'ALogin');
 
     component.onSubmit();
