@@ -16,7 +16,12 @@ export class AuthService {
   
   private baseURL = environment.apiBaseURL;
 
-  constructor(private router: Router, private httpClient:HttpClient) {}
+  constructor(
+    private router: Router, 
+    private httpClient:HttpClient
+  ) {
+    
+  }
 
   private extraRevisionLoginVerify(users: User[]): User | null{
     if (!!users[0]) {
@@ -37,7 +42,7 @@ export class AuthService {
       if (user) {
         return user
       }else{
-        throw new Error('datos invalidos');
+        throw new Error('Los datos son invalidos');
       }
     }))
   }

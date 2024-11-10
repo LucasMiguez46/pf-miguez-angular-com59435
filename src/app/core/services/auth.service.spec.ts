@@ -15,11 +15,16 @@ const mockUser: User = {
   ultimoNombre: 'Mock',
   gmail: 'mockuser@mail.com',
   password: '123456',
+  role: 'USER',
   curso: 'l0WY',
   createdAt: new Date(),
   token: 'FJDSFNSDvmfSKDdmsddaamds',
 };
 const mockAuthData: AuthData = {
+  gmail: 'mockuser@mail.com',
+  password: '123456',
+};
+const mockAuthDataV2: AuthData = {
   gmail: 'mockuser@mail.com',
   password: '123456',
 };
@@ -68,7 +73,7 @@ fdescribe('AuthService', () => {
   });
 
   it('Debe retornar un error al realizar un login invalido', (done) => {
-    service.login(mockAuthData).subscribe({
+    service.login(mockAuthDataV2).subscribe({
       error: (err) => {
         expect(err).toBeInstanceOf(Error);
         expect(err['message']).toBe('Los datos son invalidos');
@@ -82,6 +87,22 @@ fdescribe('AuthService', () => {
     });
     mockReq.flush([]);
   });
+
+  // it('Debe retornar un error al realizar un login invalido', (done) => {
+  //   service.login(mockAuthDataV2).subscribe({
+  //     error: (err) => {
+  //       expect(err).toBeInstanceOf(Error);
+  //       expect(err['message']).toBe('Los datos son invalidos');
+  //       done();
+  //     },
+  //   });
+
+  //   const mockReq = httpContoller.expectOne({
+  //     url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+  //     method: 'GET',
+  //   });
+  //   mockReq.flush([]);
+  // });
 
   it('Logout debe remover el token de localstorage, debe desestablecer el usuario autenticado y debe redirigir a /auth/login', (done) => {
     const spyOnNavigate = spyOn(router, 'navigate');

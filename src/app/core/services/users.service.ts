@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../features/dashboard/users/models';
-import { concatMap, map, Observable} from 'rxjs';
+import { concatMap, Observable} from 'rxjs';
 import { generateRandomString } from '../../shared/utils';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -20,14 +20,6 @@ export class UsersService {
   
   getUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.baseURL}/users`);
-  }
-
-  getIsUserAdmin(role: string): Observable<boolean>{
-    return this.httpClient.get<User>(`${this.baseURL}/users/${role}`).pipe(
-      map((user: User) => {
-        return user.role === 'admin';
-      }),
-    )
   }
 
   getAuthenticatedUser(): Observable<User | undefined> {

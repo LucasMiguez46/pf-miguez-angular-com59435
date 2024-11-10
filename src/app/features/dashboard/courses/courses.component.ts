@@ -5,8 +5,6 @@ import { generateRandomString } from '../../../shared/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
 import { UsersService } from '../../../core/services/users.service';
-import { Observable } from 'rxjs';
-import { User } from '../users/models';
 
 
 @Component({
@@ -22,33 +20,15 @@ dataSource: Courses[] = [];
 
 isLoading = false;
 
-isAdmin: boolean = false;
-authUser$: Observable<User | undefined>; 
-
   constructor(
     private matDialog:MatDialog, 
-    private userService: UsersService,
     private coursesService: CoursesService,
   ){
-    this.authUser$ = this.userService.getAuthenticatedUser();
   }
 
 
   ngOnInit(): void {
-    this.checkIfAdmin(); 
     this.loadCourses();
-  }
-
-  checkIfAdmin(): void {
-    const role = 'admin'; // Asegúrate de obtener el rol adecuado de tu sistema de autenticación o estado
-    this.userService.getIsUserAdmin(role).subscribe({
-      next: (isAdmin: boolean) => {
-        this.isAdmin = isAdmin;  // Asigna el valor recibido de la verificación del rol
-      },
-      error: (err) => {
-        console.error('Error al verificar si el usuario es admin:', err);
-      }
-    });
   }
   
   loadCourses(): void {
