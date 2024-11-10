@@ -15,6 +15,7 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { FontPlusTwentyDirective } from './directives/font-plus-twenty.directive';
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {MatListModule} from '@angular/material/list';
     FontPlusTwentyDirective,
     MatCardModule,
     MatListModule,
+    DragDropModule,
   ],
 })
 export class SharedModule { }

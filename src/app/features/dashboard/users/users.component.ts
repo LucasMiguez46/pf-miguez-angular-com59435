@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Courses } from '../courses/models';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 @Component({
@@ -22,14 +24,17 @@ export class UsersComponent implements OnInit {
   dataSourceCourses: Courses[] = [];
 
   isLoading = false;
+  authUser$: Observable<User | null>;
 
   constructor(
     private matDialog:MatDialog, 
     private usersService: UsersService,  
     private coursesService: CoursesService,  
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
+    this.authUser$ = this.authService.authUser$;
   }
 
   ngOnInit(): void {

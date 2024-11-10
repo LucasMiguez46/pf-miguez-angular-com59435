@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Clases } from './models';
 import { ClasesService } from '../../../core/services/clases.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
+import { User } from '../users/models';
 @Component({
   selector: 'app-clases',
   templateUrl: './clases.component.html',
@@ -22,14 +25,17 @@ export class ClasesComponent {
   editingId: string | null = null;
 
   isEditing?: Clases;
+  authUser$: Observable<User | null>;
 
   constructor(
     private clasesService: ClasesService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
     this.clasesForm = this.fb.group({
       name: ['', Validators.required],
     });
+    this.authUser$ = this.authService.authUser$;
   }
 
   ngOnInit(): void {

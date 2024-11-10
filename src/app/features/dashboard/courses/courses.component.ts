@@ -5,6 +5,9 @@ import { generateRandomString } from '../../../shared/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
 import { UsersService } from '../../../core/services/users.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../core/services/auth.service';
+import { User } from '../users/models';
 
 
 @Component({
@@ -17,13 +20,16 @@ export class CoursesComponent implements OnInit{
 [x: string]: any;
 displayedColumns: string[] = ['id', 'name','price', 'createdAt', 'actions'];
 dataSource: Courses[] = [];
+authUser$: Observable<User | null>;
 
 isLoading = false;
 
   constructor(
     private matDialog:MatDialog, 
     private coursesService: CoursesService,
+    private authService: AuthService,
   ){
+    this.authUser$ = this.authService.authUser$;
   }
 
 

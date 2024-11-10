@@ -68,23 +68,28 @@
   "clases": [
     {
       "id": "3fd2",
-      "name": "clase-1"
+      "name": "clase-1",
+      "createdAt": "2024-11-10T21:10:01.419Z"
     },
     {
       "id": "1923",
-      "name": "clase-2"
+      "name": "clase-2",
+      "createdAt": "2024-11-10T21:10:01.419Z"
     },
     {
       "id": "ab26",
-      "name": "clase-3"
+      "name": "clase-3",
+      "createdAt": "2024-11-10T21:10:01.419Z"
     },
     {
       "id": "8892",
-      "name": "clase-4"
+      "name": "clase-4",
+      "createdAt": "2024-11-10T21:10:01.419Z"
     },
     {
       "id": "789b",
-      "name": "clase-5"
+      "name": "clase-5",
+      "createdAt": "2024-11-10T21:10:01.419Z"
     }
   ]
 }

@@ -17,8 +17,8 @@ export class DashboardComponent {
 
   constructor(
     private router: Router, 
-    private authService: AuthService) 
-    {
+    private authService: AuthService
+  ){
     this.authUser$ = this.authService.authUser$;
     }
 
