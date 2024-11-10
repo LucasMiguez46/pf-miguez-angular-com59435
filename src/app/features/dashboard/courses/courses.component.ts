@@ -48,7 +48,14 @@ isLoading = false;
 
   onDelete(id:string){
     if(confirm('Estas seguro de eliminarlo?')){
-      this.dataSource = this.dataSource.filter((cursos) => cursos.id !== id);
+      this.coursesService.deleteById(id).subscribe({
+        next: (updatedCursos) =>{
+          this.dataSource = updatedCursos;
+        },
+        error: (err) => {
+          alert('Error al eliminar la clase' + err);
+        }
+      })
     }
   }
 
@@ -60,26 +67,45 @@ isLoading = false;
     }).afterClosed().
     subscribe({
       next: (result) =>{
-        console.log('Recibimos: ', result);
-
         if (!!result) {
           if (editingCourse) {
-            this.dataSource = this.dataSource.map((course) => course.id === editingCourse.id ? {
-              ...course,
+            // Actualiza el curso en el backend
+            this.coursesService.updateCourse(editingCourse.id, {
+              ...editingCourse,
               ...result,
-              id: course.id,
-              createdAt: course.createdAt,
-            } : course);
-          }else{
-            this.dataSource=[
-              ...this.dataSource,{
-                ...result,
-                id: generateRandomString(4),
-                fecha: new Date(), 
-              },
-            ]
+            }).subscribe(() => {
+              this.dataSource = this.dataSource.map((course) =>
+                course.id === editingCourse.id
+                  ? { ...course, ...result }
+                  : course
+              );
+            });
+          } else {
+            // Crea un nuevo curso en el backend
+            this.coursesService.createCourses(result).subscribe((newCourse) => {
+              this.dataSource = [...this.dataSource, newCourse];
+            });
           }
         }
+
+        // if (!!result) {
+        //   if (editingCourse) {
+        //     this.dataSource = this.dataSource.map((course) => course.id === editingCourse.id ? {
+        //       ...course,
+        //       ...result,
+        //       id: course.id,
+        //       createdAt: course.createdAt,
+        //     } : course);
+        //   }else{
+        //     this.dataSource=[
+        //       ...this.dataSource,{
+        //         ...result,
+        //         id: generateRandomString(4),
+        //         fecha: new Date(), 
+        //       },
+        //     ]
+        //   }
+        // }
       }
     });
   }

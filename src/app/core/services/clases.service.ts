@@ -1,32 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { concatMap, Observable, of, throwError } from 'rxjs';
 import { generateRandomString } from '../../shared/utils';
 import { Clases } from '../../features/dashboard/clases/models';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
-let CLASES_DB: Clases[] = [
-  {
-    id: generateRandomString(4),
-    name: 'clase 1',
-    createdAt: new Date(),
-  },
-  {
-    id: generateRandomString(4),
-    name: 'clase 2',
-    createdAt: new Date(),
-  },
-  {
-    id: generateRandomString(4),
-    name: 'clase 3',
-    createdAt: new Date(),
-  },
-];
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClasesService {
+  private baseURL = environment.apiBaseURL;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -34,34 +18,23 @@ export class ClasesService {
       return this.httpClient.get<Clases[]>(`${environment.apiBaseURL}/clases`);
     }
   
-    createClases(
-      clase: Omit<Clases, 'id' | 'createdAt'>
-    ): Observable<Clases> {
-      const claseCreada = {
-        ...clase,
+    createClases(data: Omit<Clases, 'id'>): Observable<Clases> {
+      return this.httpClient.post<Clases>(`${this.baseURL}/clases`,{
+        ...data,
         id: generateRandomString(4),
         createdAt: new Date(),
-      };
-      CLASES_DB.push(claseCreada);
-      return of(claseCreada);
+      });
     }
   
-    editClases(id: string, clases: Partial<Clases>): Observable<Clases> {
-      const clasesToEdit = CLASES_DB.find((cat) => cat.id === id);
-  
-      if (!clasesToEdit) {
-        return throwError(() => new Error('No se encontro la clase'));
-      }
-  
-      CLASES_DB = CLASES_DB.map((cat) =>
-        cat.id === id ? { ...clasesToEdit, ...clases } : cat
-      );
-  
-      return of(clasesToEdit);
+    editClases(id: string, clases: Partial<Clases>){
+      return this.httpClient
+      .patch<Clases>(`${this.baseURL}/clases/${id}`, clases)
+      .pipe(concatMap(() => this.getClases()));
     }
 
     deleteById(id: string): Observable<Clases[]> {
-      CLASES_DB = CLASES_DB.filter((p) => p.id !== id);
-      return this.getClases();
+      return this.httpClient
+      .delete<Clases>(`${this.baseURL}/clases/${id}`)
+      .pipe(concatMap(() => this.getClases()));
     }
 }

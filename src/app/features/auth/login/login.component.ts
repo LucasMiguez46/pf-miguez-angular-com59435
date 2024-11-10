@@ -38,7 +38,6 @@ export class LoginComponent {
         this.router.navigate(['dashboard', 'home']);
       },
       error: (err) => {
-        console.error(err);
         if (err instanceof Error) {
           alert(err.message);
         }
@@ -50,7 +49,6 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
     } else {
-      // login
       this.ALogin();
     }
   }

@@ -44,7 +44,7 @@ export class UsersDetailComponent implements OnInit {
       },
       error: (err) => {
         this.errorMessage = 'Error al cargar los cursos: ' + err.message;
-        console.error('Error al cargar los cursos', err);
+        alert('Error al cargar los cursos'+ err);
         this.isLoading = false;
       }
     });
@@ -67,7 +67,7 @@ export class UsersDetailComponent implements OnInit {
       },
       error: (err) => {
         this.errorMessage = 'Error al cargar el usuario: ' + err.message;
-        console.error('Error al cargar el usuario', err);
+        alert('Error al cargar el usuario'+ err);
         this.isLoading = false;
       }
     });

@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Courses } from '../courses/models';
-import { AuthService } from '../../../core/services/auth.service';
 
 
 @Component({
@@ -28,7 +27,6 @@ export class UsersComponent implements OnInit {
     private matDialog:MatDialog, 
     private usersService: UsersService,  
     private coursesService: CoursesService,  
-    private authService: AuthService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -61,7 +59,7 @@ export class UsersComponent implements OnInit {
         this.dataSourceCourses = courses;
       },
       error: () => {
-        console.error('Error al cargar los cursos');
+        alert('Error al cargar los cursos');
       },
     });
   }
@@ -85,7 +83,7 @@ export class UsersComponent implements OnInit {
           this.dataSource = updatedUsers;
         },
         error: (err) => {
-          console.error('Error al eliminar el usuario', err);
+          alert('Error al eliminar el usuario' + err);
         }
       });
     }
@@ -100,7 +98,6 @@ export class UsersComponent implements OnInit {
     .afterClosed()
     .subscribe({
       next: (result) => {
-        console.log('Recibimos: ', result);
   
         if (!!result) {
           if (editingUser) {
@@ -118,7 +115,7 @@ export class UsersComponent implements OnInit {
                 );
               },
               error: (err) => {
-                console.error('Error al actualizar el usuario', err);
+                alert('Error al actualizar el usuario'+ err);
               }
             });
           } else {
@@ -127,7 +124,7 @@ export class UsersComponent implements OnInit {
                 this.dataSource = [...this.dataSource, newUser]; 
               },
               error: (err) => {
-                console.error('Error al crear el usuario', err);
+                alert('Error al crear el usuario'+ err);
               }
             });
           }

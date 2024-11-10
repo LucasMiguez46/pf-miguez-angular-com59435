@@ -9,14 +9,14 @@
       "role": "admin",
       "token": "hdsoaghf72984hdu38dnh26fo4hnd982",
       "createdAt": "2024-11-02T19:44:14.046Z",
-      "curso": "l0WY"
+      "curso": "a0fc"
     },
     {
       "id": "3696",
       "primerNombre": "mar",
       "ultimoNombre": "ibamos",
       "gmail": "MarIb@gmail.com",
-      "curso": "7uU3",
+      "curso": "507a",
       "role": "USER",
       "password": "e8pe7Avo",
       "token": "x6sKj4HCsZ0gGjYK5zWb",
@@ -30,7 +30,19 @@
       "password": "bI9QV4dD",
       "role": "USER",
       "token": "XwHcaI5buyiNZ4WpjESM",
-      "createdAt": "2024-11-10T16:09:36.253Z"
+      "createdAt": "2024-11-10T16:09:36.253Z",
+      "curso": "7054"
+    },
+    {
+      "id": "Y6CV",
+      "primerNombre": "pedrito",
+      "ultimoNombre": "hechevarria",
+      "gmail": "epd@gmail.com",
+      "curso": "a0fc",
+      "createdAt": "2024-11-10T21:10:01.419Z",
+      "role": "USER",
+      "password": "Q5lHo6Cf",
+      "token": "9Rr6QrdawRUU0yK4xT8m"
     }
   ],
   "cursos": [

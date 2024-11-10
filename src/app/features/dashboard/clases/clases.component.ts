@@ -110,7 +110,14 @@ export class ClasesComponent {
 
   onDelete(id:string){
     if(confirm('Estas seguro de eliminarlo?')){
-      this.clases = this.clases.filter((clas) => clas.id !== id);
+      this.clasesService.deleteById(id).subscribe({
+        next: (updatedClases) =>{
+          this.clases = updatedClases;
+        },
+        error: (err) => {
+          alert('Error al eliminar la clase' + err);
+        }
+      })
     }
   }
 }

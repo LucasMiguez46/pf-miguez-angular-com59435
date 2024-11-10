@@ -46,7 +46,7 @@ export class RegisterComponent {
         console.log('Usuario guardado exitosamente:', response);
         alert('Usuario registrado exitosamente');
       }, error => {
-        console.error('Error al guardar usuario:', error);
+        alert('Error al guardar usuario:' + error);
       });
     }
   }
