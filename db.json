@@ -33,6 +33,46 @@
       "createdAt": "2024-11-10T16:09:36.253Z"
     }
   ],
-  "cursos": [],
-  "clases": []
+  "cursos": [
+    {
+      "id": "a0fc",
+      "name": "html y css",
+      "price": 1999,
+      "categoryId": "jhefuf"
+    },
+    {
+      "id": "507a",
+      "name": "Javascript",
+      "price": 1999,
+      "categoryId": "rgerhe"
+    },
+    {
+      "id": "7054",
+      "name": "Angular",
+      "price": 1999,
+      "categoryId": "ergtuw"
+    }
+  ],
+  "clases": [
+    {
+      "id": "3fd2",
+      "name": "clase-1"
+    },
+    {
+      "id": "1923",
+      "name": "clase-2"
+    },
+    {
+      "id": "ab26",
+      "name": "clase-3"
+    },
+    {
+      "id": "8892",
+      "name": "clase-4"
+    },
+    {
+      "id": "789b",
+      "name": "clase-5"
+    }
+  ]
 }

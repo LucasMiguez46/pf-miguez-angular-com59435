@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Courses } from '../courses/models';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class UsersComponent implements OnInit {
   dataSourceCourses: Courses[] = [];
 
   isLoading = false;
+  isAdmin: boolean = false;
+  authUser$: Observable<User | undefined>; 
 
   constructor(
     private matDialog:MatDialog, 
@@ -29,12 +32,27 @@ export class UsersComponent implements OnInit {
     private coursesService: CoursesService,  
     private router: Router,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    this.authUser$ = this.usersService.getAuthenticatedUser();
+  }
 
   ngOnInit(): void {
+    this.checkIfAdmin(); 
     this.loadUsers();
-    
   }
+
+  checkIfAdmin(): void {
+    const role = 'admin'; // Asegúrate de obtener el rol adecuado de tu sistema de autenticación o estado
+    this.usersService.getIsUserAdmin(role).subscribe({
+      next: (isAdmin: boolean) => {
+        this.isAdmin = isAdmin;  // Asigna el valor recibido de la verificación del rol
+      },
+      error: (err) => {
+        console.error('Error al verificar si el usuario es admin:', err);
+      }
+    });
+  }
+
   
   loadUsers(): void {
     this.isLoading = true;
@@ -62,6 +80,7 @@ export class UsersComponent implements OnInit {
       },
     });
   }
+
 
   getCourseName(courseId: string): string {
     const course = this.dataSourceCourses.find(c => c.id === courseId);

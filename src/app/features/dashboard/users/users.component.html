@@ -1,5 +1,5 @@
  <h2 tamaño='20px'appFontPlusTwenty class="p-3">Lista de alumnos:</h2>
-
+ <!-- [disabled]="(authUser$ | async)?.role != 'admin'" -->
 <button mat-button (click)="openModal()">
   <mat-icon>
     add
@@ -48,8 +48,8 @@
       <button mat-icon-button>
         <mat-icon (click)="openModal(element)">edit</mat-icon>
       </button>
-      <button mat-icon-button>
-        <mat-icon (click)="onDelete(element.id)">delete</mat-icon>
+      <button mat-icon-button >
+        <mat-icon (click)="onDelete(element.id)" >delete</mat-icon>
       </button>
     </td>
   </ng-container>

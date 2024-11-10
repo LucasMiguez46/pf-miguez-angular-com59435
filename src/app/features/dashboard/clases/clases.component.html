@@ -2,12 +2,12 @@
 
 <div class="d-flex align-items-center">
   <h3 tamaño='16px'appFontPlusTwenty>Cree una clase:</h3>
-  <form [formGroup]="clasesForm" (ngSubmit)="handleSubmit()" class="p-3">
+  <form [formGroup]="clasesForm" (ngSubmit)="handleSubmit()" class="p-3" >
       <mat-form-field>
         <mat-label>Nombre de la clase</mat-label>
         <input formControlName="name" matInput placeholder="Default" />
     
-        <button matSuffix mat-icon-button>
+        <button matSuffix mat-icon-button [disabled]="(authUser$ | async)?.role != 'admin'">
           <mat-icon> {{ isEditing ? "edit" : "add" }}</mat-icon>
         </button>
       </mat-form-field>
@@ -55,10 +55,10 @@
         </ng-container>
   
         <ng-template #defaultActions>
-          <button mat-icon-button (click)="startEdit(element)">
+          <button mat-icon-button (click)="startEdit(element)" [disabled]="(authUser$ | async)?.role != 'admin'">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="onDelete(element.id)">
+          <button mat-icon-button (click)="onDelete(element.id)" [disabled]="(authUser$ | async)?.role != 'admin'">
             <mat-icon>delete</mat-icon>
           </button>
         </ng-template>
