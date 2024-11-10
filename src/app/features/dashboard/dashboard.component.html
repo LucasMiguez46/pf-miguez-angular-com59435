@@ -5,12 +5,20 @@
   
     <div class="example-sidenav-content" role="heading">
         <mat-toolbar>
-            <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>
-                <a mat-fab routerLink="/dashboard/home" tamaño='20px'appFontPlusTwenty class="p-2, m-3"><mat-icon>home</mat-icon></a>
-                student registration application</span>
+            <div class="d-flex justify-content-between align-items-center w-100 h-100">
+                <div>
+                    <button mat-icon-button (click)="drawer.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">
+                        <mat-icon>menu</mat-icon>
+                    </button>
+                    <span>
+                        <a mat-fab routerLink="/dashboard/home" tamaño='20px'appFontPlusTwenty class="p-2, m-3"><mat-icon>home</mat-icon></a>
+                        student registration application
+                    </span>
+                </div>
+                <div *ngIf="authUser$ | async; let authUser" class="p-3">
+                    <p>{{ authUser.primerNombre }} {{ authUser.ultimoNombre }}: {{authUser.role}}</p>
+                </div>
+            </div>
         </mat-toolbar>
 
         <router-outlet></router-outlet>

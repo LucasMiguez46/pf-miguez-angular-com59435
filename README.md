@@ -1,3 +1,11 @@
+# datos de ingreso Admin
+gmail: lumi46@gmail.com
+password: 123456
+
+# datos de ingreso No admin
+gmail: MarIb@gmail.com
+password: e8pe7Avo
+
 # PfMiguezAngularCom59435
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.6.
