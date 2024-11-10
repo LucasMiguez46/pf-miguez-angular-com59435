@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Courses } from '../../features/dashboard/courses/models';
 import { generateRandomString } from '../../shared/utils';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 let DATABASE: Courses[] = [
   {
@@ -31,8 +33,11 @@ let DATABASE: Courses[] = [
   providedIn: 'root'
 })
 export class CoursesService {
+
+  constructor(private httpClient: HttpClient) { }
+
   getCourses(): Observable<Courses[]> {
-    return of([...DATABASE]);
+    return this.httpClient.get<Courses[]>(`${environment.apiBaseURL}/cursos`);
   }
 
   deleteById(id: string): Observable<Courses[]> {

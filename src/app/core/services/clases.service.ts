@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { generateRandomString } from '../../shared/utils';
 import { Clases } from '../../features/dashboard/clases/models';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 let CLASES_DB: Clases[] = [
   {
@@ -26,10 +28,10 @@ let CLASES_DB: Clases[] = [
 })
 export class ClasesService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
     getClases(): Observable<Clases[]> {
-      return of([...CLASES_DB]);
+      return this.httpClient.get<Clases[]>(`${environment.apiBaseURL}/clases`);
     }
   
     createClases(

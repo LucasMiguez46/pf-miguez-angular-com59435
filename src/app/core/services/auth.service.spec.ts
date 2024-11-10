@@ -61,7 +61,7 @@ fdescribe('AuthService', () => {
       },
     });
     const mockReq = httpContoller.expectOne({
-      url: `${service['baseURL']}/users?email=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+      url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
       method: 'GET',
     });
     mockReq.flush([mockUser]);
@@ -77,7 +77,7 @@ fdescribe('AuthService', () => {
     });
 
     const mockReq = httpContoller.expectOne({
-      url: `${service['baseURL']}/users?email=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+      url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
       method: 'GET',
     });
     mockReq.flush([]);
@@ -88,7 +88,7 @@ fdescribe('AuthService', () => {
 
     service.login(mockAuthData).subscribe();
     const mockReq = httpContoller.expectOne({
-      url: `${service['baseURL']}/users?email=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+      url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
       method: 'GET',
     });
     mockReq.flush([mockUser]);

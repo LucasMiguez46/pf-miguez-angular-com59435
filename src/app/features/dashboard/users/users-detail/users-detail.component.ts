@@ -29,12 +29,7 @@ export class UsersDetailComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.idUsuario = this.activatedRoute.snapshot.params['id'];
-
-    // if (this.idUsuario) {
-    //   this.getUserDetails(this.idUsuario);
-    // }
     if (this.idUsuario) {
-      // Primero cargamos la lista de cursos y luego los detalles del usuario
       this.loadCourses();
     }
   }
@@ -43,7 +38,6 @@ export class UsersDetailComponent implements OnInit {
     this.coursesService.getCourses().subscribe({
       next: (cursos) => {
         this.dataSourceCourses = cursos;
-        // Después de cargar los cursos, cargamos los detalles del usuario
         if (this.idUsuario) {
           this.getUserDetails(this.idUsuario);
         }
@@ -58,8 +52,6 @@ export class UsersDetailComponent implements OnInit {
 
   getCourseName(courseId: string): string {
     const course = this.dataSourceCourses.find(c => c.id === courseId);
-    console.log("el curso es: " + course);
-    console.log(this.dataSourceCourses);
     return course ? course.name : 'Curso no encontrado';
   }
 
@@ -82,7 +74,7 @@ export class UsersDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    window.history.back(); // Navega hacia atrás en el historial del navegador
+    window.history.back();
   }
   
 }

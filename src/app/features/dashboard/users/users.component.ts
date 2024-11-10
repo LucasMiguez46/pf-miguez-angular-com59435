@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { User } from './models';
-import { generateRandomString } from '../../../shared/utils';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
 import { CoursesService } from '../../../core/services/courses.service';
@@ -57,7 +56,6 @@ export class UsersComponent implements OnInit {
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.dataSourceCourses = courses;
-        console.log('Cursos cargados:', this.dataSourceCourses);
       },
       error: () => {
         console.error('Error al cargar los cursos');
@@ -114,19 +112,15 @@ export class UsersComponent implements OnInit {
                     createdAt: user.createdAt,
                   } : user
                 );
-                console.log('Usuario actualizado:', updatedUser);
               },
               error: (err) => {
                 console.error('Error al actualizar el usuario', err);
               }
             });
           } else {
-            // Crear un nuevo usuario
             this.usersService.createUser(result).subscribe({
               next: (newUser) => {
-                // Añadimos el nuevo usuario a la dataSource local
-                this.dataSource = [...this.dataSource, newUser]; // <-- Asegúrate de que es un array plano de User[]
-                console.log('Nuevo usuario creado:', newUser);
+                this.dataSource = [...this.dataSource, newUser]; 
               },
               error: (err) => {
                 console.error('Error al crear el usuario', err);
