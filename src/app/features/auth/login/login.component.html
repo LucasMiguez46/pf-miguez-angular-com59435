@@ -1,5 +1,5 @@
 <h1 class="text-center text-info-emphasis">Iniciar sesion</h1>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row p-2">
   <div class="col-12">
     <mat-form-field class="w-100">
       <mat-label>Email</mat-label>
@@ -33,4 +33,9 @@
   <div class="col-12">
     <button type="submit" class="w-100" mat-flat-button>Ingresar</button>
   </div>
+
 </form>
+
+<div class="col-12 p-2">
+  <button type="submit" class="w-100" mat-flat-button routerLink="/auth/register">Registrarse</button>
+</div>

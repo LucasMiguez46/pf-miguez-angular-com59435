@@ -21,6 +21,16 @@
       "password": "e8pe7Avo",
       "token": "x6sKj4HCsZ0gGjYK5zWb",
       "createdAt": "2024-11-03T04:22:53.279Z"
+    },
+    {
+      "id": "8636",
+      "primerNombre": "Sabry",
+      "ultimoNombre": "miguez",
+      "gmail": "sabrymi@gmail.com",
+      "password": "bI9QV4dD",
+      "role": "USER",
+      "token": "XwHcaI5buyiNZ4WpjESM",
+      "createdAt": "2024-11-10T16:09:36.253Z"
     }
   ],
   "cursos": [],

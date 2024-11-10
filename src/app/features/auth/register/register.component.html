@@ -1,1 +1,54 @@
-<p>register works!</p>
+<h2 class="text-center text-info-emphasis">Registrar usuario</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row p-2">
+    <div class="col-6">
+        <mat-form-field class="w-100">
+          <mat-label>Nombre</mat-label>
+          <input formControlName="primerNombre" matInput />
+          <mat-error>
+            @if (registerForm.get('primerNombre')?.hasError('required')) {
+              Campo Obligatorio.
+            }
+          </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-100">
+          <mat-label>Apellido</mat-label>
+          <input formControlName="ultimoNombre" matInput />
+          <mat-error>
+            @if (registerForm.get('ultimoNombre')?.hasError('required')) {
+              Campo Obligatorio.
+            }
+          </mat-error>
+        </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field class="w-100">
+        <mat-label>Gmail</mat-label>
+        <input formControlName="gmail" matInput />
+        <mat-error>
+          @if (registerForm.get('gmail')?.hasError('required')) {
+            Campo Obligatorio.
+          }
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+        <mat-form-field class="w-100">
+          <mat-label>Contraseña</mat-label>
+          <input formControlName="password" matInput />
+          <mat-error>
+            @if (registerForm.get('password')?.hasError('required')) {
+              Campo Obligatorio.
+            }
+          </mat-error>
+        </mat-form-field>
+      </div>
+    <div class="col-12">
+      <button type="submit" class="w-100" mat-flat-button
+      
+      >Registrarse</button> 
+      <!-- routerLink="/auth/login" -->
+    </div>
+  
+</form>
