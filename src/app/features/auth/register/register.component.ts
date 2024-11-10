@@ -1,12 +1,7 @@
 import { Component} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { User } from '../../dashboard/users/models';
 import { AuthService } from '../../../core/services/auth.service';
 import { UsersService } from '../../../core/services/users.service';
-
-interface UserDialogData {
-  editingUser?: User;
-}
 
 @Component({
   selector: 'app-register',
@@ -41,9 +36,7 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const user = this.registerForm.value;
 
-      // Llamar al servicio para guardar el usuario en db.json
       this.userService.createUser(user).subscribe(response => {
-        console.log('Usuario guardado exitosamente:', response);
         alert('Usuario registrado exitosamente');
       }, error => {
         alert('Error al guardar usuario:' + error);

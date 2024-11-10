@@ -31,7 +31,6 @@ export class UsersService {
     return this.httpClient.post<User>(`${this.baseURL}/users`, {
       ...data,
       role: 'USER',
-      password: generateRandomString(8),
       token: generateRandomString(20),
       createdAt: new Date().toISOString(),
     });
