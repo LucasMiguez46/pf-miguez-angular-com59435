@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, throwError } from 'rxjs';
+import { Injectable} from '@angular/core';
+import { map, Observable} from 'rxjs';
 import { User } from '../../features/dashboard/users/models';
 import { Router } from '@angular/router';
 import { AuthData } from '../../features/auth/models';
@@ -11,7 +11,7 @@ import { AuthActions } from '../../store/actions/auth.actions';
 
 
 @Injectable({ providedIn: 'root' })
-export class AuthService {
+export class AuthService{
   
   public authUser$: Observable<User | null>;
 

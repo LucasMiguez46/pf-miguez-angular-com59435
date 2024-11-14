@@ -9,6 +9,7 @@ import { UsersService } from '../../../core/services/users.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  passwordInputType: 'password' | 'text' = 'password';
   registerForm: FormGroup;
 
   constructor(
@@ -36,11 +37,22 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const user = this.registerForm.value;
 
-      this.userService.createUser(user).subscribe(response => {
-        alert('Usuario registrado exitosamente');
-      }, error => {
-        alert('Error al guardar usuario:' + error);
+      this.userService.createUser(user).subscribe({
+        next: (response) => {
+          alert('Usuario registrado exitosamente' + response.id);
+        },
+        error: (error) => {
+          alert('Error al guardar usuario:' + error);
+        }
       });
+    }
+  }
+
+  togglePasswordInputType(): void {
+    if (this.passwordInputType === 'password') {
+      this.passwordInputType = 'text';
+    } else {
+      this.passwordInputType = 'password';
     }
   }
 }

@@ -93,25 +93,6 @@ isLoading = false;
             });
           }
         }
-
-        // if (!!result) {
-        //   if (editingCourse) {
-        //     this.dataSource = this.dataSource.map((course) => course.id === editingCourse.id ? {
-        //       ...course,
-        //       ...result,
-        //       id: course.id,
-        //       createdAt: course.createdAt,
-        //     } : course);
-        //   }else{
-        //     this.dataSource=[
-        //       ...this.dataSource,{
-        //         ...result,
-        //         id: generateRandomString(4),
-        //         fecha: new Date(), 
-        //       },
-        //     ]
-        //   }
-        // }
       }
     });
   }

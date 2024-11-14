@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { concatMap, Observable, of, throwError } from 'rxjs';
+import { concatMap, Observable} from 'rxjs';
 import { generateRandomString } from '../../shared/utils';
 import { Clases } from '../../features/dashboard/clases/models';
 import { environment } from '../../../environments/environment';

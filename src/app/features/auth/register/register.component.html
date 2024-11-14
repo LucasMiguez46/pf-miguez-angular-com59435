@@ -36,7 +36,15 @@
     <div class="col-6">
         <mat-form-field class="w-100">
           <mat-label>Contraseña</mat-label>
-          <input formControlName="password" matInput />
+          <input formControlName="password" [type]="passwordInputType" matInput />
+          <button
+          type="button"
+          (click)="togglePasswordInputType()"
+          matSuffix
+          mat-icon-button
+        >
+          <mat-icon>visibility</mat-icon>
+        </button>
           <mat-error>
             @if (registerForm.get('password')?.hasError('required')) {
               Campo Obligatorio.

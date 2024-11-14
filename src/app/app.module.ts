@@ -22,7 +22,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    StoreModule.forRoot(RootReducer, {}),
+    StoreModule.forRoot(RootReducer),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [

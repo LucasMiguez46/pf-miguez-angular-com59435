@@ -6,5 +6,5 @@ export const selectAuthState =
 
 export const selectAutheticatedUser = createSelector(
   selectAuthState,
-  (state) => state.authenticatedUser
+  (state) => state.authenticatedUser ?? null 
 );
