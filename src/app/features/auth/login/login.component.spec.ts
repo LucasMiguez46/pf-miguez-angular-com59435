@@ -8,15 +8,16 @@ import { SharedModule } from '../../../shared/shared.module';
 import { MockProvider } from 'ng-mocks';
 import { AuthService } from '../../../core/services/auth.service';
 import { of } from 'rxjs';
+import { StoreModule } from '@ngrx/store';
 
-describe('LoginComponent', () => {
+fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [HttpClientTestingModule, SharedModule],
+      imports: [HttpClientTestingModule, SharedModule,StoreModule.forRoot({})],
       providers: [
         provideHttpClientTesting(),
         MockProvider(AuthService, {
@@ -35,14 +36,14 @@ describe('LoginComponent', () => {
   });
 
   it('El email debe ser requerido', () => {
-    const emailControl = component.loginForm.get('email');
+    const emailControl = component.loginForm.get('gmail');
     emailControl?.setValue('');
     expect(emailControl?.hasError('required')).toBeTrue();
   });
 
   it('Al llamar onSubmit, si el form es invalido, debe marcar los campos como touched', () => {
     component.loginForm.setValue({
-      email: '',
+      gmail: '',
       password: '',
     });
 
@@ -58,7 +59,7 @@ describe('LoginComponent', () => {
 
   it('Al llamar onSubmit debe llamar a login de AuthService', () => {
     component.loginForm.setValue({
-      email: 'fake@mail.com',
+      gmail: 'fake@mail.com',
       password: '123456',
     });
 

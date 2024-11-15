@@ -30,8 +30,6 @@ const mockAuthDataV2: AuthData = {
   password: '123456',
 };
 
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-
 fdescribe('AuthService', () => {
   let service: AuthService;
   let httpController: HttpTestingController;
@@ -109,7 +107,6 @@ fdescribe('AuthService', () => {
   //   expect(localStorage.getItem('token')).toBeNull();
   //   service.authUser$.subscribe({
   //     next: (user) => {
-  //       console.log('User after logout:', user);
   //       expect(user).toBeNull();
   //       done();
   //     },
@@ -118,4 +115,48 @@ fdescribe('AuthService', () => {
   //   expect(spyOnNavigate).toHaveBeenCalledOnceWith(['auth', 'login']);
   // });
 //===============
+  it('Logout debe remover el token de localstorage', (done) => {
+    service.login(mockAuthData).subscribe();
+    const mockReq = httpController.expectOne({
+      url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+      method: 'GET',
+    });
+    mockReq.flush([mockUser]);
+
+    service.logout();
+    expect(localStorage.getItem('token')).toBeNull();
+    done();
+  });
+
+  // it('Logout debe desestablecer el usuario autenticado', (done) => {
+  //   service.login(mockAuthData).subscribe();
+  //   const mockReq = httpController.expectOne({
+  //     url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+  //     method: 'GET',
+  //   });
+  //   mockReq.flush([mockUser]);
+
+  //   service.logout();
+  //   service.authUser$.subscribe({
+  //     next: (user) => {
+  //       expect(user).toBeNull();
+  //       done();
+  //     },
+  //   });
+  // });
+
+  it('Logout debe redirigir a /auth/login', (done) => {
+    const spyOnNavigate = spyOn(router, 'navigate');
+
+    service.login(mockAuthData).subscribe();
+    const mockReq = httpController.expectOne({
+      url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
+      method: 'GET',
+    });
+    mockReq.flush([mockUser]);
+
+    service.logout();
+    expect(spyOnNavigate).toHaveBeenCalledOnceWith(['auth', 'login']);
+    done();
+  });
 });
