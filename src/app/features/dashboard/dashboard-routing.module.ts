@@ -20,6 +20,11 @@ const routes: Routes = [
       import('./users/users.module').then((m) => m.UsersModule),
   },
   {
+    path: 'inscripciones',
+    loadChildren: () =>
+      import('./inscripciones/inscripciones.module').then((m) => m.InscripcionesModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

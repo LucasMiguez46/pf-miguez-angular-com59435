@@ -4,7 +4,6 @@ import { CoursesService } from '../../../core/services/courses.service';
 import { generateRandomString } from '../../../shared/utils';
 import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './courses-dialog/courses-dialog.component';
-import { UsersService } from '../../../core/services/users.service';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../users/models';

@@ -16,6 +16,8 @@ import { FontPlusTwentyDirective } from './directives/font-plus-twenty.directive
 import {MatCardModule} from '@angular/material/card';
 import {MatListModule} from '@angular/material/list';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { MatOptionModule } from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatOptionModule,
     MatSelectModule,
     MatDialogModule,
     FullNamePipe,
@@ -43,6 +46,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatCardModule,
     MatListModule,
     DragDropModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class SharedModule { }

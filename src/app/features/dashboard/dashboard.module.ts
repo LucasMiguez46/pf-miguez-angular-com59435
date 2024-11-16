@@ -13,7 +13,7 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     DashboardComponent,
     SideMenuComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,

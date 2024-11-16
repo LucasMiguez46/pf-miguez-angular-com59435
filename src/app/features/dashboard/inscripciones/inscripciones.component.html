@@ -1,0 +1,31 @@
+<form [formGroup]="InscripcionForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>curso</mat-label>
+      <mat-select formControlName="cursoId">
+        <mat-option
+          [value]="curso.id"
+          *ngFor="let curso of cursoOptions$ | async"
+        >
+          {{ curso.name }} - {{ curso.price | currency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <mat-select formControlName="userId">
+        <mat-option [value]="user.id" *ngFor="let user of userOptions$ | async">
+          {{ user.primerNombre }} {{ user.ultimoNombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button type="submit" mat-flat-button>Guardar</button>
+</form>
+
+<!-- @if(isLoadingInscripcion$| async) {
+    <mat-spinner></mat-spinner>
+    }@else { @if (loadInscripcionError$ | async; as error) {
+    <h2>Oops! Ocurrio un error!</h2>
+    <p>{{ error["message"] }}</p>
+    } @else { -->
+    <pre>{{ Inscripciones$ | async | json }}</pre>
+    <!-- } } -->
