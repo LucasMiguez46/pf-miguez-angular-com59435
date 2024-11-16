@@ -17,7 +17,6 @@ const mockUser: User = {
   gmail: 'mockuser@mail.com',
   password: '123456',
   role: 'USER',
-  curso: 'l0WY',
   createdAt: new Date(),
   token: 'FJDSFNSDvmfSKDdmsddaamds',
 };
@@ -92,29 +91,6 @@ fdescribe('AuthService', () => {
     mockReq.flush([]);
   });
 
-//===============
-  // it('Logout debe remover el token de localstorage, debe desestablecer el usuario autenticado y debe redirigir a /auth/login', (done) => {
-  //   const spyOnNavigate = spyOn(router, 'navigate');
-
-  //   service.login(mockAuthData).subscribe();
-  //   const mockReq = httpController.expectOne({
-  //     url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
-  //     method: 'GET',
-  //   });
-  //   mockReq.flush([mockUser]);
-
-  //   service.logout();
-  //   expect(localStorage.getItem('token')).toBeNull();
-  //   service.authUser$.subscribe({
-  //     next: (user) => {
-  //       expect(user).toBeNull();
-  //       done();
-  //     },
-  //   });
-
-  //   expect(spyOnNavigate).toHaveBeenCalledOnceWith(['auth', 'login']);
-  // });
-//===============
   it('Logout debe remover el token de localstorage', (done) => {
     service.login(mockAuthData).subscribe();
     const mockReq = httpController.expectOne({
@@ -127,23 +103,6 @@ fdescribe('AuthService', () => {
     expect(localStorage.getItem('token')).toBeNull();
     done();
   });
-
-  // it('Logout debe desestablecer el usuario autenticado', (done) => {
-  //   service.login(mockAuthData).subscribe();
-  //   const mockReq = httpController.expectOne({
-  //     url: `${service['baseURL']}/users?gmail=${mockAuthData.gmail}&password=${mockAuthData.password}`,
-  //     method: 'GET',
-  //   });
-  //   mockReq.flush([mockUser]);
-
-  //   service.logout();
-  //   service.authUser$.subscribe({
-  //     next: (user) => {
-  //       expect(user).toBeNull();
-  //       done();
-  //     },
-  //   });
-  // });
 
   it('Logout debe redirigir a /auth/login', (done) => {
     const spyOnNavigate = spyOn(router, 'navigate');

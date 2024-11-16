@@ -1,0 +1,57 @@
+// Clase para el div con la clase 'home-style'
+.home-style {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  section {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8em;
+    color: #00FFFF;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    color: #00FFFF;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  ul a {
+    background-color: #6200ea;
+    color: white;
+    font-size: 1.2em;
+    padding: 12px 20px;
+    margin: 10px;
+    text-decoration: none;
+    border-radius: 30px;
+    display: inline-block;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul a:hover {
+    background-color: #3700b3;
+    transform: translateY(-2px);
+  }
+
+  .p-3 {
+    padding: 1rem;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
