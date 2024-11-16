@@ -9,7 +9,7 @@ export const inscripcionFeatureKey = 'inscripcion';
 export interface State {
   isLoadingInscripcions: boolean;
   loadInscripcionsError: Error | null;
-  inscripcion: Inscripcion[];
+  inscripcions: Inscripcion[];
   cursoOptions: Courses[];
   userOptions: User[];
 }
@@ -17,7 +17,7 @@ export interface State {
 export const initialState: State = {
   isLoadingInscripcions: false,
   loadInscripcionsError: null,
-  inscripcion: [],
+  inscripcions: [],
   cursoOptions: [],
   userOptions: [],
 };
