@@ -61,19 +61,22 @@
       "id": "a0fc",
       "name": "html y css",
       "price": 1999,
-      "categoryId": "jhefuf"
+      "categoryId": "jhefuf",
+      "createdAt": "2024-11-02T19:44:14.046Z"
     },
     {
       "id": "507a",
       "name": "Javascript",
       "price": 1999,
-      "categoryId": "rgerhe"
+      "categoryId": "rgerhe",
+      "createdAt": "2024-11-02T19:44:14.046Z"
     },
     {
       "id": "7054",
       "name": "Angular",
       "price": 1999,
-      "categoryId": "ergtuw"
+      "categoryId": "ergtuw",
+      "createdAt": "2024-11-02T19:44:14.046Z"
     }
   ],
   "clases": [
@@ -113,6 +116,11 @@
       "id": "ff2d",
       "cursoId": "507a",
       "userId": "9813"
+    },
+    {
+      "id": "b4fe",
+      "cursoId": "7054",
+      "userId": "8636"
     }
   ]
 }

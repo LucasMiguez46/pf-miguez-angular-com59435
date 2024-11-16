@@ -4,7 +4,6 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { User } from './models';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../../../core/services/users.service';
-import { CoursesService } from '../../../core/services/courses.service';
 import { Courses } from '../courses/models';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/services/auth.service';
@@ -18,18 +17,15 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class UsersComponent implements OnInit {
 [x: string]: any;
-  displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','curso','actions'];
+  displayedColumns: string[] = ['id', 'primerNombre', 'gmail','createdAt','actions'];
   dataSource: User[] = [];
-
-  dataSourceCourses: Courses[] = [];
 
   isLoading = false;
   authUser$: Observable<User | null>;
 
   constructor(
     private matDialog:MatDialog, 
-    private usersService: UsersService,  
-    private coursesService: CoursesService,  
+    private usersService: UsersService,   
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService
@@ -57,22 +53,7 @@ export class UsersComponent implements OnInit {
         this.isLoading = false;
       },
     });
-  
-    // Cargar los cursos
-    this.coursesService.getCourses().subscribe({
-      next: (courses) => {
-        this.dataSourceCourses = courses;
-      },
-      error: () => {
-        alert('Error al cargar los cursos');
-      },
-    });
-  }
 
-
-  getCourseName(courseId: string): string {
-    const course = this.dataSourceCourses.find(c => c.id === courseId);
-    return course ? course.name : 'Curso no encontrado';
   }
 
   goToDetail(id: string): void {

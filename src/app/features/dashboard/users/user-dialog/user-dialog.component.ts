@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { UsersService } from '../../../../core/services/users.service';
 import { User } from '../models';
-import { CoursesService } from '../../../../core/services/courses.service';
 import { Courses } from '../../courses/models';
 import { generateRandomString } from '../../../../shared/utils';
 
@@ -23,8 +21,6 @@ export class UserDialogComponent implements OnInit {
   constructor(
     private matDialogRef: MatDialogRef<UserDialogComponent>, 
     private formBuilder: FormBuilder,
-    private usersService: UsersService,
-    private coursesService: CoursesService,
     @Inject(MAT_DIALOG_DATA) public data:UserDialogData
   ) {
 
@@ -46,13 +42,6 @@ export class UserDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe(cursos => {
-      this.dataSource = cursos;
-
-      if (this.isEditing) {
-        this.patchFormValue();
-      }
-    });
   }
 
   private get isEditing() {
@@ -66,7 +55,6 @@ export class UserDialogComponent implements OnInit {
         primerNombre: this.data.editingUser.primerNombre,
         ultimoNombre: this.data.editingUser.ultimoNombre,
         gmail: this.data.editingUser.gmail,
-        curso: this.data.editingUser.curso 
       });
     }
   }

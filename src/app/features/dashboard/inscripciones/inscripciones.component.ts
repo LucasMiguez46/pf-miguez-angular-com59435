@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../users/models';
 import { InscripcionActions } from './store/inscripcion.actions';
 import { Courses } from '../courses/models';
 import { Inscripcion } from './models';
 import { selectCursoOptions, selectInscripcion, selectIsLoadinInscripcion, selectLoadInscripcionError, selectUserOptions } from './store/inscripcion.selectors';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-inscripciones',
@@ -20,14 +21,19 @@ export class InscripcionesComponent implements OnInit{
   loadInscripcionError$: Observable<Error | null>;
   isLoadingInscripcion$: Observable<boolean>;
 
+  panelOpenStates: BehaviorSubject<boolean>[] = [];
+  authUser$: Observable<User | null>;
+
   InscripcionForm: FormGroup;
 
-  constructor(private store: Store, private formBuilder: FormBuilder) {
+  constructor(private store: Store, private formBuilder: FormBuilder, private authService: AuthService,) {
     this.InscripcionForm = this.formBuilder.group({
       cursoId: [null, [Validators.required]],
       userId: [null, [Validators.required]],
     });
 
+    this.authUser$ = this.authService.authUser$;
+    
     this.Inscripciones$ = this.store.select(selectInscripcion);
     this.cursoOptions$ = this.store.select(selectCursoOptions);
     this.userOptions$ = this.store.select(selectUserOptions);
@@ -37,15 +43,10 @@ export class InscripcionesComponent implements OnInit{
 
   ngOnInit(): void {
     this.store.dispatch(InscripcionActions.cargarInscripcion());
-    this.Inscripciones$.subscribe(data => {
-      console.log('Datos de inscripciones desde el observable:', data);
-      if (data) {
-        console.log('Inscripciones cargadas correctamente:', data);
-      } else {
-        console.log('No se encontraron inscripciones.');
-      }
-    });
     this.store.dispatch(InscripcionActions.cargarCoursesAndUserOptions());
+    this.Inscripciones$.subscribe(inscripciones => {
+      this.panelOpenStates = inscripciones.map(() => new BehaviorSubject<boolean>(false));
+    });
   }
 
   onSubmit(): void {
@@ -56,4 +57,14 @@ export class InscripcionesComponent implements OnInit{
       this.InscripcionForm.reset();
     }
   }
+
+  panelOpenStateValue(index: number): boolean {
+    return this.panelOpenStates[index]?.value || false;
+  }
+
+  togglePanelState(index: number): void {
+    const currentState = this.panelOpenStateValue(index);
+    this.panelOpenStates[index].next(!currentState);
+  }
+  
 }

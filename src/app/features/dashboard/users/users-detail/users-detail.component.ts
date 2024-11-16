@@ -4,6 +4,8 @@ import { UsersService } from '../../../../core/services/users.service';
 import { User } from '../models';
 import { Courses } from '../../courses/models';
 import { CoursesService } from '../../../../core/services/courses.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-users-detail',
@@ -14,7 +16,7 @@ export class UsersDetailComponent implements OnInit {
   idUsuario?: string;
   user?: User;
   dataSourceCourses: Courses[] = [];
-
+  authUser$: Observable<User | null>;
   
   isLoading = false;
   errorMessage: string | null = null;
@@ -22,8 +24,11 @@ export class UsersDetailComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private usersService: UsersService,
-    private coursesService: CoursesService
-  ){}
+    private coursesService: CoursesService,
+    private authService: AuthService
+  ){
+    this.authUser$ = this.authService.authUser$;
+  }
 
 
   ngOnInit(): void {

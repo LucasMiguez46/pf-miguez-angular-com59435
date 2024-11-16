@@ -1,0 +1,45 @@
+.inscripcion-card {
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  mat-card-header {
+    background-color: #00FFFF
+  }
+  
+  mat-card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  mat-card-subtitle {
+    font-size: 1rem;
+    color: #757575;
+  }
+  
+  mat-card-content p {
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 5px;
+  }
+
+.titulo-principal{
+    justify-content: center;
+    padding: 5px;
+}
+
+.form-personalizado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    form{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        justify-content: center;
+    }
+}

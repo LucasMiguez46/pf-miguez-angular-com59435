@@ -1,22 +1,32 @@
-
-
 <div class="home-style">
     <section *ngIf="authUser$ | async; let authUser" class="p-3">
-        <h2>Bienvenido {{ authUser.primerNombre }} {{ authUser.ultimoNombre }}</h2>
+      <h2>Bienvenido {{ authUser.primerNombre }} {{ authUser.ultimoNombre }}</h2>
     </section>
-
-    <section *ngFor="let course of userCourses$ | async" class="p-3">
-        <p>actualmente se encuentra en los siguientes cursos:</p>
-        <ul>
-            <li>{{ course.name }}</li>
-        </ul>
-    </section>
-
-    <h3 tamaño='30px'appFontPlusTwenty class="p-3">Herramientas:</h3>
+  
+    <h3 tamaño="30px" appFontPlusTwenty class="p-3">Herramientas:</h3>
     <ul class="p-2">
-        <a mat-fab extended routerLink="/dashboard/courses" tamaño='20px'appFontPlusTwenty  class="p-2, m-3" cdkDrag>Cursos</a>
-        <a mat-fab extended routerLink="/dashboard/clases" tamaño='20px'appFontPlusTwenty  class="p-2, m-3" cdkDrag>Clases</a>
-        <a mat-fab extended routerLink="/dashboard/users" tamaño='20px'appFontPlusTwenty  class="p-2, m-3" cdkDrag>Alumnos</a>
-        <a mat-fab extended routerLink="/dashboard/inscripciones" tamaño='20px'appFontPlusTwenty  class="p-2, m-3" cdkDrag>Inscripciones</a>
+      <a mat-fab extended routerLink="/dashboard/courses"
+         [matTooltip]="'Ir a ' + 'lista de cursos'"
+         tamaño="20px" appFontPlusTwenty class="p-2 m-3" cdkDrag>
+         Cursos
+      </a>
+  
+      <a mat-fab extended routerLink="/dashboard/clases"
+         [matTooltip]="'Ir a ' + 'lista de clases'"
+         tamaño="20px" appFontPlusTwenty class="p-2 m-3" cdkDrag>
+         Clases
+      </a>
+  
+      <a mat-fab extended routerLink="/dashboard/users"
+         [matTooltip]="'Ir a ' + 'lista de users'"
+         tamaño="20px" appFontPlusTwenty class="p-2 m-3" cdkDrag>
+         Alumnos
+      </a>
+  
+      <a mat-fab extended routerLink="/dashboard/inscripciones"
+         [matTooltip]="'Ir a ' + 'inscripciones'"
+         tamaño="20px" appFontPlusTwenty class="p-2 m-3" cdkDrag>
+         Inscripciones
+      </a>
     </ul>
-</div>
+  </div>

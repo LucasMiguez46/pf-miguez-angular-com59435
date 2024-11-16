@@ -11,8 +11,15 @@
     </mat-card-title>
     <mat-card-content>
       <ul>
-        <li>Mail: {{ user.gmail }}</li>
-        <li>Curso: {{ getCourseName(user.curso)}}</li>
+        <li>Gmail: {{ user.gmail }}</li>
+      </ul>
+    </mat-card-content>
+    <mat-card-content >
+      <ul>
+        <li *ngIf="(authUser$ | async)?.role === 'admin'">Contraseña: {{user.password}}</li>
+        <li *ngIf="(authUser$ | async)?.role === 'admin'">rol: {{user.role}}</li>
+        <li *ngIf="(authUser$ | async)?.role === 'admin'">ID: {{user.id}}</li>
+        <li *ngIf="(authUser$ | async)?.role === 'admin'">Fecha de aparicion: {{user.createdAt}}</li>
       </ul>
     </mat-card-content>
   </mat-card>

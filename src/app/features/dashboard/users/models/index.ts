@@ -7,5 +7,4 @@ export interface User{
     ultimoNombre: string;
     gmail: string;
     createdAt: Date;
-    curso: string;
 }

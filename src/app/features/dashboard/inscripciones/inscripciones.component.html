@@ -1,31 +1,80 @@
-<form [formGroup]="InscripcionForm" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>curso</mat-label>
-      <mat-select formControlName="cursoId">
-        <mat-option
-          [value]="curso.id"
-          *ngFor="let curso of cursoOptions$ | async"
-        >
-          {{ curso.name }} - {{ curso.price | currency }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Usuario</mat-label>
-      <mat-select formControlName="userId">
-        <mat-option [value]="user.id" *ngFor="let user of userOptions$ | async">
-          {{ user.primerNombre }} {{ user.ultimoNombre }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button type="submit" mat-flat-button>Guardar</button>
-</form>
+<div  class="p-5 form-personalizado">
+  <h2 tamaño='20px'appFontPlusTwenty>Agregar Inscripcion:</h2>
+  <form [formGroup]="InscripcionForm" (ngSubmit)="onSubmit()">
+      <mat-form-field>
+        <mat-label>curso</mat-label>
+        <mat-select formControlName="cursoId">
+          <mat-option
+            [value]="curso.id"
+            *ngFor="let curso of cursoOptions$ | async"
+          >
+            {{ curso.name }} - {{ curso.price | currency }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="userId">
+          <mat-option [value]="user.id" *ngFor="let user of userOptions$ | async">
+            {{ user.primerNombre }} {{ user.ultimoNombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button type="submit" mat-flat-button>Guardar</button>
+  </form>  
+</div>
 
-<!-- @if(isLoadingInscripcion$| async) {
-    <mat-spinner></mat-spinner>
-    }@else { @if (loadInscripcionError$ | async; as error) {
-    <h2>Oops! Ocurrio un error!</h2>
-    <p>{{ error["message"] }}</p>
-    } @else { -->
-    <pre>{{ Inscripciones$ | async | json }}</pre>
-    <!-- } } -->
+
+    <mat-card *ngIf="isLoadingInscripcion$ | async; else content" class="card">
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+      </mat-card-content>
+    </mat-card>
+    
+    <ng-template #content class="p-5">
+      <mat-card *ngIf="loadInscripcionError$ | async as error; else inscripcionesContent" class="card">
+        <mat-card-header>
+          <mat-card-title>Oops! Ocurrió un error!</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ error.message }}</p>
+        </mat-card-content>
+      </mat-card>
+
+      <ng-template #inscripcionesContent>
+        <mat-card class="card">
+          <mat-card-header tamaño='20px' appFontPlusTwenty class="titulo-principal">
+            <mat-card-title>Inscripciones</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-accordion [multi]="true">
+              <mat-expansion-panel hideToggle *ngFor="let inscripcion of Inscripciones$ | async; let i = index"
+                                   [expanded]="panelOpenStateValue(i)">
+                <mat-expansion-panel-header (click)="togglePanelState(i)">
+                  <mat-panel-title>
+                    {{ inscripcion.user?.primerNombre }} {{ inscripcion.user?.ultimoNombre }}
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{ panelOpenStateValue(i) ? 'Ocultar detalles' : 'Ver detalles' }}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <mat-card-content>
+                  <p tamaño='20px' appFontPlusTwenty>Informacion del usuario: </p>
+                  <p><strong>Nombre:</strong> {{ inscripcion.user?.primerNombre }}</p>
+                  <p><strong>Apellido:</strong> {{ inscripcion.user?.ultimoNombre}}</p>
+                  <p><strong>Fecha de inscripcion:</strong> {{ inscripcion.user?.createdAt }}</p>
+                  <p><strong>Gmail:</strong> {{ inscripcion.user?.gmail}}</p>
+                  <p><strong>Rol:</strong> {{ inscripcion.user?.role}}</p>
+                  <p *ngIf="(authUser$ | async)?.role === 'admin'"><strong>Usuario ID:</strong> {{ inscripcion.user?.id}}</p>
+                  <p *ngIf="(authUser$ | async)?.role === 'admin'"><strong>Usuario contraseña:</strong> {{ inscripcion.user?.password}}</p>
+                  <p *ngIf="(authUser$ | async)?.role === 'admin'"><strong>Usuario token:</strong> {{ inscripcion.user?.token}}</p>
+
+                  <p tamaño='20px' appFontPlusTwenty>Informacion del curso inscripto del usuario: </p>
+                  <p><strong>Curso:</strong> {{ inscripcion.curso?.name }}</p>
+                  <p><strong>Precio del Curso: $</strong>{{ inscripcion.curso?.price }}</p>
+                </mat-card-content>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
